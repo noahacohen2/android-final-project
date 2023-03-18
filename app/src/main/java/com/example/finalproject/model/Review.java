@@ -25,7 +25,8 @@ public class Review implements Parcelable {
 
     public static Review fromJson(Map<String, Object> json) {
         String seat = (String)json.get("Seat");
-        Float rate = (Float)json.get("Stars");
+        Double rateDouble = (Double)json.get("Stars");
+        Float rate = rateDouble.floatValue();
         String text = (String)json.get("Content");
         String user = (String)json.get("UserId");
 
