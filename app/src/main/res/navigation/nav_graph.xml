@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/musicalFragment">
+
+    <fragment
+        android:id="@+id/musicalFragment"
+        android:name="com.example.finalproject.MusicalFragment"
+        android:label="fragment_musical"
+        tools:layout="@layout/fragment_musical" >
+        <action
+            android:id="@+id/action_musicalFragment_to_reviewsListFragment2"
+            app:destination="@id/reviewsListFragment" />
+        <action
+            android:id="@+id/action_musicalFragment_to_userProfileFragment"
+            app:destination="@id/userProfileFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/reviewsListFragment"
+        android:name="com.example.finalproject.ReviewsListFragment"
+        android:label="fragment_reviews_list"
+        tools:layout="@layout/fragment_reviews_list" />
+    <fragment
+        android:id="@+id/userProfileFragment"
+        android:name="com.example.finalproject.UserProfileFragment"
+        android:label="fragment_user_profile"
+        tools:layout="@layout/fragment_user_profile" />
+</navigation>
