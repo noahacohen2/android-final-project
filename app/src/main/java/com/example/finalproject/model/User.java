@@ -16,10 +16,7 @@ public class User {
     public User(String username, String password, String firstName,
                 String lastName, String mail, String bio) {
         this(username, password);
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.mail = mail;
-        this.bio = bio;
+        setExtraData(firstName, lastName, mail, bio);
     }
 
     public void setExtraData(String firstName,
@@ -28,5 +25,29 @@ public class User {
         this.lastName = lastName;
         this.mail = mail;
         this.bio = bio;
+    }
+
+    public String getUsername(){
+        return  this.username;
+    }
+
+    public String getPassword(){
+        return  this.password;
+    }
+
+    public String getFirstName(){
+        return  this.firstName;
+    }
+
+    public String getLastName(){
+        return  this.lastName;
+    }
+
+    public String getMail(){
+        return  this.mail;
+    }
+
+    public String getBio(){
+        return  this.bio;
     }
 }

@@ -128,7 +128,7 @@
             tools:ignore="MissingConstraints" />
 
         <ImageView
-            android:id="@+id/pink_header"
+            android:id="@+id/user_img"
             android:layout_width="476dp"
             android:layout_height="263dp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -147,7 +147,7 @@
             android:textColor="#FFFFFF"
             android:textSize="57sp"
             android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="@+id/pink_header"
+            app:layout_constraintBottom_toBottomOf="@+id/user_img"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -165,7 +165,7 @@
             app:layout_constraintEnd_toStartOf="@+id/username_tp"
             app:layout_constraintHorizontal_bias="0.25"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/pink_header"
+            app:layout_constraintTop_toTopOf="@+id/user_img"
             tools:ignore="MissingConstraints" />
 
         <EditText
@@ -211,7 +211,7 @@
             android:paddingRight="10dp"
             android:textSize="27sp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/pink_header"
+            app:layout_constraintTop_toBottomOf="@+id/user_img"
             tools:ignore="MissingConstraints" />
 
         <Button
