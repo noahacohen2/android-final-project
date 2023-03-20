@@ -17,47 +17,35 @@ public class Model {
     }
 
     private Model() {
-//        for (int i = 0; i < 20; i++) {
-//            addReview(new Review("name " + i, 4F, "noa", String.valueOf(i)));
-//        }
     }
 
-//    ArrayList<Review> data = new ArrayList<>();
-
-    public interface GetAllStudentsListener {
+    // Reviews
+    public interface GetAllReviewsListener {
         void onComplete(ArrayList<Review> data);
     }
-    public void getAllReviews(GetAllStudentsListener callback) {
+    public void getAllReviews(GetAllReviewsListener callback) {
         firebaseModel.getAllReviews(callback);
-//        return data;
     }
 
-    ArrayList<Review> reviews = new ArrayList<>();
-    public ArrayList<Review> getUserReviews(String user) {
-
-        ArrayList<Review> result =new ArrayList<>();
-
-
-        getAllReviews((data) -> {
-            reviews = data;
-        });
-
-        for (Review review: reviews) {
-            if (review.getUser().equals(user)) {
-
-                result.add(review);
-            }
-        }
-        return result;
+    public interface GetUserReviewsListener {
+        void onComplete(ArrayList<Review> data);
+    }
+    public void getUserReviews(String user, GetUserReviewsListener callback) {
+        firebaseModel.getUserReviews(user,callback);
     }
 
     public interface AddReviewListener {
         void onComplete();
     }
-    public void addReview(Review review) {
-//        data.add(review);
-        firebaseModel.addReview(review, ()->{
-        Log.d("noa", "add!");
-        });
+    public void addReview(Review review, AddReviewListener callback) {
+        firebaseModel.addReview(review, callback);
     }
+
+    public interface UpdateReviewListener {
+        void onComplete();
+    }
+    public void updateReview(Review review, UpdateReviewListener callback) {
+        firebaseModel.updateReview(review, callback);
+    }
+    //End reviews
 }

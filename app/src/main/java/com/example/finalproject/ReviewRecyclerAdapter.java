@@ -1,9 +1,12 @@
 package com.example.finalproject;
 
 import androidx.recyclerview.widget.RecyclerView;
+
+import android.os.Parcelable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
@@ -20,28 +23,39 @@ class ReviewViewHolder extends RecyclerView.ViewHolder{
     ImageView reviewIv;
 
     List<Review> data;
-    public ReviewViewHolder(@NonNull View itemView, List<Review> data) {
+    public ReviewViewHolder(@NonNull View itemView, List<Review> data, ReviewRecyclerAdapter.OnItemClickListener listener) {
         super(itemView);
         this.data = data;
         seatTv = itemView.findViewById(R.id.reviewrow_seat_tv);
         textTv = itemView.findViewById(R.id.reviewrow_review_tv);
         ratingBar = itemView.findViewById(R.id.reviewrow_ratingBar);
         reviewIv = itemView.findViewById(R.id.reviewrow_img);
+
+        itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                int pos = getAdapterPosition();
+                listener.onItemClick(pos);
+            }
+        });
     }
 
     public void bind(Review review, int pos) {
         seatTv.setText(review.seat);
-        textTv.setText(review.text);
-        ratingBar.setRating(review.rate);
+        textTv.setText(review.content);
+        ratingBar.setRating(review.stars);
         //TODO: add image here
     }
 }
 
 public class ReviewRecyclerAdapter extends RecyclerView.Adapter<ReviewViewHolder>{
-
-
+    OnItemClickListener listener;
     LayoutInflater inflater;
     List<Review> data;
+
+    public static interface OnItemClickListener extends Parcelable {
+        void onItemClick(int pos);
+    }
 
     public void setData(List<Review> data) {
         this.data = data;
@@ -53,11 +67,15 @@ public class ReviewRecyclerAdapter extends RecyclerView.Adapter<ReviewViewHolder
         this.data = data;
     }
 
+    void setOnItemClickListener(OnItemClickListener listener){
+        this.listener = listener;
+    }
+
     @NonNull
     @Override
     public ReviewViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = inflater.inflate(R.layout.review_row,parent,false);
-        return new ReviewViewHolder(view, data);
+        return new ReviewViewHolder(view, data, listener);
     }
 
     @Override

@@ -67,13 +67,14 @@ package com.example.finalproject;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
+import androidx.navigation.NavDirections;
+import androidx.navigation.Navigation;
 
 import com.example.finalproject.model.Model;
 import com.example.finalproject.model.Review;
 
 import android.os.Bundle;
+import android.os.Parcel;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -81,76 +82,62 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import java.util.ArrayList;
-import java.util.List;
-
 
 public class MusicalFragment extends Fragment {
     ArrayList<Review> reviewsList = new ArrayList<>();
-
-    public enum FragmentContainerState {
-        NEW_REVIEW,
-        ALL_REVIEWS
-    }
+    ReviewsListFragment reviewListFragment;
 
     public static MusicalFragment newInstance(String musicalId, String param2) {
         MusicalFragment fragment = new MusicalFragment();
         return fragment;
     }
 
-    //    List<Student> data;
-    public static FragmentContainerState containerState = FragmentContainerState.ALL_REVIEWS;
-
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_musical, container, false);
         Button addReviewBtn = view.findViewById(R.id.musical_addReview_btn);
 
-        ReviewsListFragment reviewListFragment = (ReviewsListFragment) getChildFragmentManager().findFragmentById(R.id.musical_fc);
+        NavDirections action = MusicalFragmentDirections.actionMusicalFragmentToNewReviewFragment(null);
+        addReviewBtn.setOnClickListener(Navigation.createNavigateOnClickListener(action));
+
+
+        reviewListFragment = (ReviewsListFragment) getChildFragmentManager().findFragmentById(R.id.musical_fc);
+
+        ReviewRecyclerAdapter.OnItemClickListener reviewRowOnClickListener = new ReviewRecyclerAdapter.OnItemClickListener() {
+
+            @Override
+            public void onItemClick(int pos) {
+
+            }
+
+            @Override
+            public int describeContents() {
+                return 0;
+            }
+
+            @Override
+            public void writeToParcel(Parcel parcel, int i) {
+
+            }
+        };
 
         if (reviewListFragment != null) {
-            reviewListFragment.setParameters(reviewsList);
+            reviewListFragment.setParameters(reviewsList, reviewRowOnClickListener);
         }
 
         Model.instance().getAllReviews((reviewsData) -> {
             reviewsList = reviewsData;
-            Log.d("noa", "callback");
             if (reviewListFragment != null) {
-                reviewListFragment.setParameters(reviewsList);
+                reviewListFragment.setParameters(reviewsList, reviewRowOnClickListener);
             }
         });
 
-
-        addReviewBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                FragmentManager childFragmentManager = getChildFragmentManager();
-                FragmentTransaction transaction = childFragmentManager.beginTransaction();
-
-                if(containerState == FragmentContainerState.ALL_REVIEWS) {
-                    transaction.replace(R.id.musical_fc, new NewReviewFragment());
-                    addReviewBtn.setText("Cancel");
-                    containerState = FragmentContainerState.NEW_REVIEW;
-                } else {
-                    // Create child fragment and set arguments
-                    ReviewsListFragment reviewListFragment =  ReviewsListFragment.newInstance(reviewsList);
-                    transaction.replace(R.id.musical_fc,reviewListFragment);
-
-                    addReviewBtn.setText("Add review");
-                    containerState = FragmentContainerState.ALL_REVIEWS;
-                }
-
-                transaction.commit();
-            }
-        });
         return view;
     }
 }
