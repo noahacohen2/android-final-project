@@ -73,7 +73,7 @@ import com.example.finalproject.model.Model;
 import com.example.finalproject.model.Review;
 import android.os.Bundle;
 import android.os.Parcel;
-import android.util.Log;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;

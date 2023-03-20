@@ -10,6 +10,7 @@ public class User {
     public String lastName;
     public String mail;
     public String bio;
+    public String uid;
 
     public User(String mail, String password) {
         this.mail = mail;
@@ -20,6 +21,12 @@ public class User {
                 String lastName, String username, String bio) {
         this(mail, password);
         setExtraData(firstName, lastName, username, bio);
+    }
+
+    public User(String password, String mail, String firstName,
+                String lastName, String username, String bio, String uid) {
+        this(password, mail, firstName, lastName, username, bio);
+        this.uid = uid;
     }
 
     public void setExtraData(String firstName,
@@ -37,8 +44,9 @@ public class User {
         String lastname = (String)json.get("Lastname");
         String username = (String)json.get("Username");
         String bio = (String)json.get("Bio");
+        String uid = (String)json.get("Uid");
 
-        return new User(password, mail, firstname, lastname, username, bio);
+        return new User(password, mail, firstname, lastname, username, bio, uid);
     }
 
     public Map<String, Object> toJson() {
@@ -49,6 +57,7 @@ public class User {
         json.put("Lastname", this.getLastName());
         json.put("Username", this.getUsername());
         json.put("Bio", this.getBio());
+        json.put("Uid", this.getUid());
         return json;
     }
 
@@ -74,5 +83,13 @@ public class User {
 
     public String getBio(){
         return  this.bio;
+    }
+
+    public String getUid() {
+        return uid;
+    }
+
+    public void setUid(String uid) {
+        this.uid = uid;
     }
 }

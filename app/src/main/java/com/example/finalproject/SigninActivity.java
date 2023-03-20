@@ -13,6 +13,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class SigninActivity extends AppCompatActivity {
 
@@ -85,12 +86,15 @@ public class SigninActivity extends AppCompatActivity {
         startActivity(intent);
         finish();
     }
+
     private void saveUser(User userToAdd) {
         mAuth.createUserWithEmailAndPassword(userToAdd.getMail(), userToAdd.getPassword())
                 .addOnCompleteListener( new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
+                            String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+                            userToAdd.setUid(uid);
                             Model.instance().createUser(userToAdd, () -> changeActivity(MainActivity.class));
 
                         } else {

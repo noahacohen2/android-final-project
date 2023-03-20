@@ -1,25 +1,25 @@
 package com.example.finalproject;
 
+import android.content.Intent;
 import android.os.Bundle;
-
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavDirections;
 import androidx.navigation.Navigation;
-
 import android.os.Parcel;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
 import com.example.finalproject.databinding.FragmentUserProfileBinding;
 import com.example.finalproject.model.Model;
 import com.example.finalproject.model.Review;
+import com.google.firebase.auth.FirebaseAuth;
+
 import java.util.ArrayList;
 
 public class UserProfileFragment extends Fragment {
     ArrayList<Review> reviewsList = new ArrayList<>();
     FragmentUserProfileBinding binding;
+    FirebaseAuth mAuth;
 
     public UserProfileFragment() {
         // Required empty public constructor
@@ -33,6 +33,7 @@ public class UserProfileFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mAuth = FirebaseAuth.getInstance();
     }
 
     @Override
@@ -75,6 +76,21 @@ public class UserProfileFragment extends Fragment {
             reviewListFragment.setParameters(reviewsList, reviewRowOnClickListener);
         }
 
+        NavDirections action = UserProfileFragmentDirections.actionUserProfileFragmentToEditUserProfileFragment();
+        binding.editBtn.setOnClickListener(Navigation.createNavigateOnClickListener(action));
+        binding.logoutBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mAuth.signOut();
+                changeActivity(LoginActivity.class);
+            }
+        });
+
         return view;
+    }
+
+    private void changeActivity(Class activityClass) {
+        Intent intent = new Intent(getActivity(), activityClass);
+        startActivity(intent);
     }
 }
