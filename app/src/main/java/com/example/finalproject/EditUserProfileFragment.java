@@ -54,7 +54,6 @@ public class EditUserProfileFragment extends Fragment {
     private void onCancel() {
         NavDirections action = EditUserProfileFragmentDirections.actionEditUserProfileFragmentToUserProfileFragment();
         binding.cancelEditBtn.setOnClickListener(Navigation.createNavigateOnClickListener(action));
-
     }
 
     public void onSave(View view){
