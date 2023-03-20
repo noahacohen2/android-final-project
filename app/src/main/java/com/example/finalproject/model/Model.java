@@ -1,11 +1,14 @@
 package com.example.finalproject.model;
 
+import android.graphics.Bitmap;
+
 import java.util.ArrayList;
 
 public class Model {
     private static final Model _instance = new Model();
-    private FbReiviewModel fbReviewModel = new FbReiviewModel();
+    private FbReviewModel fbReviewModel = new FbReviewModel();
     private FbUserModel fbUserModel = new FbUserModel();
+    private  FbImgModel fbImgModel = new FbImgModel();
 
     public static Model instance() {
         return _instance;
@@ -33,7 +36,6 @@ public class Model {
     public interface AddReviewListener {
         void onComplete();
     }
-
     public void addReview(Review review, AddReviewListener callback) {
         fbReviewModel.addReview(review, callback);
     }
@@ -64,4 +66,12 @@ public class Model {
         fbUserModel.updateUser(user, callback);
     }
      // End User
+
+    // Images
+    public interface UploadImageListener{
+        void onComplete(String uri);
+    }
+    public void uploadImage(String name, Bitmap bitmap, UploadImageListener callback) {
+        fbImgModel.uploadImage(name, bitmap, callback);
+    }
 }

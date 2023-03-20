@@ -8,10 +8,10 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 
-public class FbReiviewModel {
+public class FbReviewModel {
     FirebaseFirestore db;
 
-    FbReiviewModel() {
+    FbReviewModel() {
         db = FirebaseFirestore.getInstance();
         FirebaseFirestoreSettings settings = new FirebaseFirestoreSettings.Builder()
                 .setPersistenceEnabled(false).build();
@@ -19,12 +19,12 @@ public class FbReiviewModel {
     }
 
     public void getAllReviews(Model.GetAllReviewsListener callback) {
-        Log.d("noa", "getAllReviews");
         db.collection("reviews").get().addOnCompleteListener((task) -> {
             ArrayList<Review> list = new ArrayList<>();
             if(task.isSuccessful()) {
                 QuerySnapshot jsonsList = task.getResult();
                 for (DocumentSnapshot json: jsonsList) {
+
                     Review rv = Review.fromJson(json.getData(), json.getId());
                     list.add(rv);
                 }
@@ -48,14 +48,14 @@ public class FbReiviewModel {
     }
 
     public void addReview(Review review, Model.AddReviewListener listener) {
-        db.collection("reviews").add(review.toJson())
+        db.collection("reviews").document(review.getDocId()).set(review.toJson())
                 .addOnCompleteListener((task) -> {
-            listener.onComplete();
-        });
+
+                    listener.onComplete();
+                });
     }
 
     public void updateReview(Review review, Model.UpdateReviewListener listener) {
-        Log.d("noa",review.getDocId());
         db.collection("reviews").document(review.getDocId()).update(review.toJson())
                 .addOnCompleteListener(task ->{
             listener.onComplete();
