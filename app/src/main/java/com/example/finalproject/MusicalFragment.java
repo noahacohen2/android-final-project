@@ -69,10 +69,8 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavDirections;
 import androidx.navigation.Navigation;
-
 import com.example.finalproject.model.Model;
 import com.example.finalproject.model.Review;
-
 import android.os.Bundle;
 import android.os.Parcel;
 import android.util.Log;
@@ -80,7 +78,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-
 import java.util.ArrayList;
 
 public class MusicalFragment extends Fragment {

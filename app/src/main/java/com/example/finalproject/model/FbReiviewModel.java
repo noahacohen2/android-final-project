@@ -1,21 +1,17 @@
 package com.example.finalproject.model;
 
 import android.util.Log;
-
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreSettings;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
-public class FirebaseModel {
+public class FbReiviewModel {
     FirebaseFirestore db;
 
-    FirebaseModel() {
+    FbReiviewModel() {
         db = FirebaseFirestore.getInstance();
         FirebaseFirestoreSettings settings = new FirebaseFirestoreSettings.Builder()
                 .setPersistenceEnabled(false).build();
