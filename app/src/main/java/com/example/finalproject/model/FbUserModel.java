@@ -18,7 +18,7 @@ public class FbUserModel {
     }
 
     public void createUser(User user, Model.AddUserListener listener) {
-        usersCollection.add(user.toJson()).addOnCompleteListener((task) -> {
+        usersCollection.document(user.getUid()).set(user.toJson()).addOnCompleteListener((task) -> {
             listener.onComplete();
         });
     }
