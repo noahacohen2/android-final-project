@@ -8,22 +8,22 @@ public class User {
     public String mail;
     public String bio;
 
-    public User(String username, String password) {
-        this.username = username;
+    public User(String mail, String password) {
+        this.mail = mail;
         this.password = password;
     }
 
-    public User(String username, String password, String firstName,
-                String lastName, String mail, String bio) {
-        this(username, password);
-        setExtraData(firstName, lastName, mail, bio);
+    public User(String password, String mail, String firstName,
+                String lastName, String username, String bio) {
+        this(mail, password);
+        setExtraData(firstName, lastName, username, bio);
     }
 
     public void setExtraData(String firstName,
-                        String lastName, String mail, String bio) {
+                        String lastName, String username, String bio) {
         this.firstName = firstName;
         this.lastName = lastName;
-        this.mail = mail;
+        this.username = username;
         this.bio = bio;
     }
 

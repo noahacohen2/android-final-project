@@ -15,8 +15,8 @@ public class EditUserProfileFragment extends Fragment {
 
     public EditUserProfileFragment() {
         // Required empty public constructor
-        this.user = new User("daniel123", "123456", "daniel",
-                "sabag", "lal@gmail.com", "i am lala");
+        this.user = new User( "123456","lal@gmail.com", "daniel",
+                "sabag", "daniel123" , "i am lala");
     }
 
     public EditUserProfileFragment(User user) {
@@ -47,11 +47,11 @@ public class EditUserProfileFragment extends Fragment {
 
     public void onSave(){
         binding.saveEditBtn.setOnClickListener(View -> {
-            User editedUser = new User(binding.usernameTp.getText().toString(),
+            User editedUser = new User(binding.mailTp.getText().toString(),
                     this.user.getPassword(),
                     binding.firstNameTp.getText().toString(),
                     binding.lastNameTp.getText().toString(),
-                    binding.mailTp.getText().toString(),
+                    binding.usernameTp.getText().toString(),
                     binding.bioTp.getText().toString());
 
             if(saveUserNewData(editedUser)) {

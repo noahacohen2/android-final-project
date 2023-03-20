@@ -1,12 +1,7 @@
 package com.example.finalproject.model;
 
 import android.util.Log;
-
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.stream.Collectors;
 
 public class Model {
     private static final Model _instance = new Model();

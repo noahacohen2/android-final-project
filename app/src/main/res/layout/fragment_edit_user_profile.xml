@@ -18,28 +18,29 @@
         tools:ignore="MissingConstraints" />
 
     <EditText
-        android:id="@+id/username_tp"
+        android:id="@+id/mail_tp"
         android:layout_width="218dp"
         android:layout_height="52dp"
-        android:layout_marginTop="40dp"
-        android:layout_marginEnd="40dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="32dp"
         android:editable="false"
         android:ems="10"
         android:inputType="textPersonName"
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
-        android:text="daniel1234"
+        android:text="dani@gmail.com"
         android:textColor="#A79C9C"
-        android:textSize="27sp"
+        android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/user_img"
         tools:ignore="MissingConstraints" />
+
 
     <EditText
         android:id="@+id/first_name_tp"
         android:layout_width="229dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="20dp"
         android:background="@drawable/edit_text_rect"
         android:ems="10"
         android:inputType="textPersonName"
@@ -47,16 +48,32 @@
         android:paddingRight="10dp"
         android:textSize="27sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.632"
+        app:layout_constraintHorizontal_bias="0.686"
         app:layout_constraintStart_toEndOf="@+id/first_name_tv"
         app:layout_constraintTop_toBottomOf="@+id/username_tp"
+        tools:ignore="MissingConstraints" />
+
+    <EditText
+        android:id="@+id/username_tp"
+        android:layout_width="229dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="52dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/edit_text_rect"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:textSize="27sp"
+        app:layout_constraintStart_toEndOf="@+id/username_tv"
+        app:layout_constraintTop_toBottomOf="@+id/mail_tp"
         tools:ignore="MissingConstraints" />
 
     <EditText
         android:id="@+id/last_name_tp"
         android:layout_width="229dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="20dp"
         android:background="@drawable/edit_text_rect"
         android:ems="10"
         android:inputType="textPersonName"
@@ -64,33 +81,16 @@
         android:paddingRight="10dp"
         android:textSize="27sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.637"
+        app:layout_constraintHorizontal_bias="0.691"
         app:layout_constraintStart_toEndOf="@+id/last_name_tv"
         app:layout_constraintTop_toBottomOf="@+id/first_name_tp"
-        tools:ignore="MissingConstraints" />
-
-    <EditText
-        android:id="@+id/mail_tp"
-        android:layout_width="229dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:background="@drawable/edit_text_rect"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp"
-        android:textSize="27sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.818"
-        app:layout_constraintStart_toEndOf="@+id/mail_tv"
-        app:layout_constraintTop_toBottomOf="@+id/last_name_tp"
         tools:ignore="MissingConstraints" />
 
     <EditText
         android:id="@+id/bio_tp"
         android:layout_width="224dp"
         android:layout_height="90dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="20dp"
         android:background="@drawable/edit_text_rect"
         android:ems="10"
         android:inputType="textPersonName"
@@ -98,33 +98,18 @@
         android:paddingRight="10dp"
         android:textSize="27sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.803"
+        app:layout_constraintHorizontal_bias="0.843"
         app:layout_constraintStart_toEndOf="@+id/bio_tv"
-        app:layout_constraintTop_toBottomOf="@+id/mail_tp"
+        app:layout_constraintTop_toBottomOf="@+id/last_name_tp"
         tools:ignore="MissingConstraints" />
 
     <TextView
         android:id="@+id/bio_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="20dp"
         android:text="Bio:"
-        android:textColor="#000000"
-        android:textSize="27sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/mail_tv"
-        app:layout_constraintVertical_bias="0.007"
-        tools:ignore="MissingConstraints" />
-
-    <TextView
-        android:id="@+id/mail_tv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:text="Mail:"
         android:textColor="#000000"
         android:textSize="27sp"
         app:layout_constraintStart_toStartOf="parent"
@@ -132,11 +117,37 @@
         tools:ignore="MissingConstraints" />
 
     <TextView
+        android:id="@+id/mail_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="40dp"
+        android:text="Mail:"
+        android:textColor="#000000"
+        android:textSize="27sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/user_img"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/username_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="24dp"
+        android:text="Username:"
+        android:textColor="#000000"
+        android:textSize="27sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/mail_tv"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
         android:id="@+id/last_name_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="20dp"
         android:text="Last Name:"
         android:textColor="#000000"
         android:textSize="27sp"
@@ -144,33 +155,17 @@
         app:layout_constraintTop_toBottomOf="@+id/first_name_tv"
         tools:ignore="MissingConstraints" />
 
-
     <TextView
         android:id="@+id/first_name_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="28dp"
         android:layout_marginTop="20dp"
         android:text="First Name:"
         android:textColor="#000000"
         android:textSize="27sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/username_tv"
-        tools:ignore="MissingConstraints" />
-
-    <TextView
-        android:id="@+id/username_tv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="228dp"
-        android:text="Username:"
-        android:textColor="#000000"
-        android:textSize="27sp"
-        app:layout_constraintEnd_toStartOf="@+id/username_tp"
-        app:layout_constraintHorizontal_bias="0.148"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/user_img"
         tools:ignore="MissingConstraints" />
 
     <Button

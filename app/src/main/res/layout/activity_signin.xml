@@ -6,6 +6,34 @@
     android:layout_height="match_parent"
     tools:context=".SigninActivity">
 
+        <TextView
+            android:id="@+id/username_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="20dp"
+            android:text="Username:"
+            android:textColor="#000000"
+            android:textSize="27sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/last_name_tv"
+            tools:ignore="MissingConstraints" />
+
+        <TextView
+            android:id="@+id/mail_tv2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="28dp"
+            android:text="mail:"
+            android:textColor="#000000"
+            android:textSize="27sp"
+            app:layout_constraintEnd_toStartOf="@+id/mail_tp"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/user_img"
+            tools:ignore="MissingConstraints" />
+
         <EditText
             android:id="@+id/last_name_tp"
             android:layout_width="229dp"
@@ -24,27 +52,10 @@
             tools:ignore="MissingConstraints" />
 
         <EditText
-            android:id="@+id/mail_tp"
-            android:layout_width="229dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:background="@drawable/edit_text_rect"
-            android:ems="10"
-            android:inputType="textPersonName"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp"
-            android:textSize="27sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.879"
-            app:layout_constraintStart_toEndOf="@+id/mail_tv"
-            app:layout_constraintTop_toBottomOf="@+id/last_name_tp"
-            tools:ignore="MissingConstraints" />
-
-        <EditText
             android:id="@+id/bio_tp"
             android:layout_width="229dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="20dp"
             android:background="@drawable/edit_text_rect"
             android:ems="10"
             android:inputType="textPersonName"
@@ -54,7 +65,24 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.9"
             app:layout_constraintStart_toEndOf="@+id/bio_tv"
-            app:layout_constraintTop_toBottomOf="@+id/mail_tp"
+            app:layout_constraintTop_toBottomOf="@+id/username_tp"
+            tools:ignore="MissingConstraints" />
+
+        <EditText
+            android:id="@+id/username_tp"
+            android:layout_width="229dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/edit_text_rect"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:textSize="27sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.694"
+            app:layout_constraintStart_toEndOf="@+id/username_tv"
+            app:layout_constraintTop_toBottomOf="@+id/last_name_tp"
             tools:ignore="MissingConstraints" />
 
         <EditText
@@ -78,27 +106,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="20dp"
             android:text="Bio:"
             android:textColor="#000000"
             android:textSize="27sp"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/mail_tv"
-            app:layout_constraintVertical_bias="0.007"
-            tools:ignore="MissingConstraints" />
-
-        <TextView
-            android:id="@+id/mail_tv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:text="Mail:"
-            android:textColor="#000000"
-            android:textSize="27sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/last_name_tv"
+            app:layout_constraintTop_toBottomOf="@+id/username_tv"
             tools:ignore="MissingConstraints" />
 
         <TextView
@@ -154,18 +167,18 @@
             tools:ignore="MissingConstraints" />
 
         <TextView
-            android:id="@+id/username_tv"
+            android:id="@+id/mail_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="294dp"
-            android:text="Username:"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="28dp"
+            android:text="mail:"
             android:textColor="#000000"
             android:textSize="27sp"
-            app:layout_constraintEnd_toStartOf="@+id/username_tp"
-            app:layout_constraintHorizontal_bias="0.25"
+            app:layout_constraintEnd_toStartOf="@+id/mail_tp"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/user_img"
+            app:layout_constraintTop_toBottomOf="@+id/user_img"
             tools:ignore="MissingConstraints" />
 
         <EditText
@@ -180,9 +193,9 @@
             android:paddingRight="10dp"
             android:textSize="27sp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.675"
+            app:layout_constraintHorizontal_bias="0.7"
             app:layout_constraintStart_toEndOf="@+id/password_tv"
-            app:layout_constraintTop_toBottomOf="@+id/username_tp"
+            app:layout_constraintTop_toBottomOf="@+id/mail_tp"
             tools:ignore="MissingConstraints" />
 
         <TextView
@@ -195,15 +208,15 @@
             android:textColor="#000000"
             android:textSize="27sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/username_tv"
+            app:layout_constraintTop_toBottomOf="@+id/mail_tv"
             tools:ignore="MissingConstraints" />
 
         <EditText
-            android:id="@+id/username_tp"
+            android:id="@+id/mail_tp"
             android:layout_width="229dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="28dp"
-            android:layout_marginEnd="16dp"
+            android:layout_marginEnd="12dp"
             android:background="@drawable/edit_text_rect"
             android:ems="10"
             android:inputType="textPersonName"

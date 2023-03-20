@@ -33,25 +33,25 @@
         tools:ignore="MissingConstraints" />
 
     <TextView
-        android:id="@+id/username_tv"
+        android:id="@+id/mail_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="56dp"
-        android:text="Username:"
+        android:text="Mail:"
         android:textColor="#000000"
         android:textSize="34sp"
-        app:layout_constraintEnd_toStartOf="@+id/username_tp"
-        app:layout_constraintHorizontal_bias="0.571"
+        app:layout_constraintEnd_toStartOf="@+id/mail_tp"
+        app:layout_constraintHorizontal_bias="0.135"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/user_img"
         tools:ignore="MissingConstraints" />
 
     <EditText
-        android:id="@+id/username_tp"
+        android:id="@+id/mail_tp"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="56dp"
-        android:layout_marginEnd="20dp"
+        android:layout_marginEnd="16dp"
         android:background="@drawable/edit_text_rect"
         android:ems="10"
         android:inputType="textPersonName"
@@ -72,7 +72,7 @@
         android:textSize="34sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/username_tv"
+        app:layout_constraintTop_toBottomOf="@+id/mail_tv"
         app:layout_constraintVertical_bias="0.096"
         tools:ignore="MissingConstraints" />
 
@@ -90,7 +90,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.567"
         app:layout_constraintStart_toEndOf="@+id/password_tv"
-        app:layout_constraintTop_toBottomOf="@+id/username_tp"
+        app:layout_constraintTop_toBottomOf="@+id/mail_tp"
         tools:ignore="MissingConstraints" />
 
     <Button
