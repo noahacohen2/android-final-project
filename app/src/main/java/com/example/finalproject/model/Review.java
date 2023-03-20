@@ -14,24 +14,26 @@ public class Review implements Parcelable {
     public String content;
     public String userId;
     public String eventId;
+    public String imgUrl;
 
-    public Review(String seat, Float stars, String content, String userId) {
+    public Review(String seat, Float stars, String content, String userId,String docId,String eventId) {
         this.seat = seat;
         this.stars = stars;
         this.content = content;
         this.userId = userId;
-        this.docId = null;
-        this.eventId = null;
+        this.docId = docId;
+        this.eventId = eventId;
     }
 
-    public Review(String seat, Float stars, String content, String userId, String docId) {
-        this(seat, stars, content, userId);
-        this.docId = docId;
+    public Review(String seat, Float stars, String content, String userId, String docId,String eventId, String ImageUrl) {
+        this(seat,stars,content,userId,docId,eventId);
+        setImgUrl(ImageUrl);
     }
 
 
     public Review(Parcel parcel) {
-        this( parcel.readString(),parcel.readFloat(),parcel.readString(),parcel.readString());
+        // seat, stars,content,userId,eventId,docId,imgUrl
+        this( parcel.readString(),parcel.readFloat(),parcel.readString(),parcel.readString(), parcel.readString(), parcel.readString(), parcel.readString());
     }
 
     public static Review fromJson(Map<String, Object> json, String docId) {
@@ -41,7 +43,9 @@ public class Review implements Parcelable {
         String text = (String)json.get("Content");
         String user = (String)json.get("UserId");
         String id = docId;
-        return new Review(seat, rate, text, user, id);
+        String eventId = (String)json.get("EventId");
+        String ImageUrl = (String)json.get("ImageUrl");
+        return new Review(seat, rate, text, user, id, eventId, ImageUrl);
     }
 
     public Map<String, Object> toJson() {
@@ -51,6 +55,7 @@ public class Review implements Parcelable {
         json.put("Seat", getSeat());
         json.put("UserId", getUserId());
         json.put("EventId", getEventId());
+        json.put("ImageUrl", getImgUrl());
 
         return json;
     }
@@ -77,6 +82,12 @@ public class Review implements Parcelable {
 
     public String getEventId() { return eventId; };
 
+    public String getImgUrl() { return imgUrl; }
+
+    public void setImgUrl(String imgUrl) {
+        this.imgUrl = imgUrl;
+    }
+
     public static final Parcelable.Creator<Review> CREATOR = new Parcelable.Creator<Review>() {
         public Review createFromParcel(Parcel in) {
             return new Review(in);
@@ -99,6 +110,7 @@ public class Review implements Parcelable {
         dest.writeFloat(stars);
         dest.writeString(content);
         dest.writeString(userId);
+        dest.writeString(imgUrl);
     }
 
 }

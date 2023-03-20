@@ -1,6 +1,7 @@
 package com.example.finalproject;
 
 import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 
 import androidx.activity.result.ActivityResultCallback;
@@ -18,18 +19,20 @@ import android.view.ViewGroup;
 import com.example.finalproject.databinding.FragmentNewReviewBinding;
 import com.example.finalproject.model.Model;
 import com.example.finalproject.model.Review;
+import com.squareup.picasso.Picasso;
+
+import java.util.UUID;
 
 public class NewReviewFragment extends Fragment {
 
     FragmentNewReviewBinding binding;
     ActivityResultLauncher<Void> cameraLauncher;
     Review currentReview;
+    Boolean isImgSelected = false;
+    String eventId; //TODO: get from daniel's screen
 
     private void setParameters(Review rv) {
         this.currentReview = rv;
-        if(rv != null) {
-            Log.d("noa-seat", rv.getSeat());
-        }
     }
     public static NewReviewFragment newInstance(Review rv){
         NewReviewFragment frag = new NewReviewFragment();
@@ -48,7 +51,20 @@ public class NewReviewFragment extends Fragment {
         binding.seatEt.setText(currentReview.getSeat());
         binding.starsRating.setRating(currentReview.getStars());
         binding.contentEt.setText(currentReview.getContent());
-        // TODO: add img here
+        if(currentReview.getImgUrl() != null) {
+            Picasso.get().load(currentReview.getImgUrl()).placeholder(R.drawable.bear).into(binding.addImgBtn);
+        } else {
+            binding.addImgBtn.setImageResource(R.drawable.bear);
+        }
+    }
+
+    private void uploadImg(Review rv, Model.UploadImageListener callback) {
+        if (isImgSelected) {
+            binding.addImgBtn.setDrawingCacheEnabled(true);
+            binding.addImgBtn.buildDrawingCache();
+            Bitmap bitmap = ((BitmapDrawable)  binding.addImgBtn.getDrawable()).getBitmap();
+            Model.instance().uploadImage(rv.getDocId(), bitmap, callback);
+        }
     }
 
     @Override
@@ -64,6 +80,7 @@ public class NewReviewFragment extends Fragment {
             public void onActivityResult(Bitmap result) {
                 if (result != null) {
                     binding.addImgBtn.setImageBitmap(result);
+                    isImgSelected = true;
                 }
             }
         });
@@ -78,15 +95,26 @@ public class NewReviewFragment extends Fragment {
             String content = binding.contentEt.getText().toString();
 
             if(currentReview == null) {
-                Review rv = new Review(seat,rate,content, "2");
-                Model.instance().addReview(rv, () -> {
-                    Navigation.findNavController(view1).popBackStack();
+                UUID uuid = UUID.randomUUID();
+                String uniqueID = uuid.toString();
+                Review rv = new Review(seat,rate,content, "2", uniqueID, eventId);
+                uploadImg(rv, (url) -> {
+                    if(url != null) {
+                        rv.setImgUrl(url);
+                        Model.instance().addReview(rv, () -> {
+                            Navigation.findNavController(view1).popBackStack();
+                        });
+                    }
                 });
             } else {
-                String id = "2";
-                Review rv = new Review(seat,rate,content, "1", currentReview.getDocId());
-                Model.instance().updateReview(rv, () -> {
-                    Navigation.findNavController(view1).popBackStack();
+                Review rv = new Review(seat,rate,content, "1", currentReview.getDocId(),eventId);
+                uploadImg(rv,(url) -> {
+                    if(url != null) {
+                        rv.setImgUrl(url);
+                        Model.instance().updateReview(rv, () -> {
+                            Navigation.findNavController(view1).popBackStack();
+                        });
+                    }
                 });
             }
 

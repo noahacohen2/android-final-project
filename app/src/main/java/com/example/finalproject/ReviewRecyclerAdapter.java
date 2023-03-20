@@ -13,6 +13,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 
 import com.example.finalproject.model.Review;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -44,7 +45,11 @@ class ReviewViewHolder extends RecyclerView.ViewHolder{
         seatTv.setText(review.seat);
         textTv.setText(review.content);
         ratingBar.setRating(review.stars);
-        //TODO: add image here
+        if(review.getImgUrl() != null) {
+            Picasso.get().load(review.getImgUrl()).placeholder(R.drawable.bear).into(reviewIv);
+        } else {
+            reviewIv.setImageResource(R.drawable.bear);
+        }
     }
 }
 
