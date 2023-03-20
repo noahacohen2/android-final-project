@@ -1,6 +1,5 @@
 package com.example.finalproject.model;
 
-import android.util.Log;
 import java.util.ArrayList;
 
 public class Model {
@@ -13,54 +12,46 @@ public class Model {
     }
 
     private Model() {
-//        for (int i = 0; i < 20; i++) {
-//            addReview(new Review("name " + i, 4F, "noa", String.valueOf(i)));
-//        }
     }
 
-//    ArrayList<Review> data = new ArrayList<>();
-
-    public interface GetAllStudentsListener {
+    // Reviews
+    public interface GetAllReviewsListener {
         void onComplete(ArrayList<Review> data);
     }
-    public void getAllReviews(GetAllStudentsListener callback) {
+
+    public void getAllReviews(GetAllReviewsListener callback) {
         fbReviewModel.getAllReviews(callback);
-//        return data;
     }
 
-    ArrayList<Review> reviews = new ArrayList<>();
-    public ArrayList<Review> getUserReviews(String user) {
-
-        ArrayList<Review> result =new ArrayList<>();
-
-
-        getAllReviews((data) -> {
-            reviews = data;
-        });
-
-        for (Review review: reviews) {
-            if (review.getUser().equals(user)) {
-
-                result.add(review);
-            }
-        }
-        return result;
+    public interface GetUserReviewsListener {
+        void onComplete(ArrayList<Review> data);
+    }
+    public void getUserReviews(String user, GetUserReviewsListener callback) {
+        fbReviewModel.getUserReviews(user,callback);
     }
 
     public interface AddReviewListener {
         void onComplete();
     }
-    public void addReview(Review review) {
-//        data.add(review);
-        fbReviewModel.addReview(review, ()->{
-        Log.d("noa", "add!");
-        });
+
+    public void addReview(Review review, AddReviewListener callback) {
+        fbReviewModel.addReview(review, callback);
     }
 
+    public interface UpdateReviewListener {
+        void onComplete();
+    }
+    public void updateReview(Review review, UpdateReviewListener callback) {
+        fbReviewModel.updateReview(review, callback);
+    }
+    // End reviews
+
+    // User
     public interface AddUserListener {
         void onComplete();
     }
     public void createUser(User user, AddUserListener callback) {
         fbUserModel.createUser(user, callback);
     }
+     // End User
 }
