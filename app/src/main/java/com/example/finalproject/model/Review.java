@@ -2,62 +2,80 @@ package com.example.finalproject.model;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.util.Log;
 
 import java.util.HashMap;
 import java.util.Map;
 
 public class Review implements Parcelable {
+    public String docId;
     public String seat;
-    public Float rate;
-    public String text;
-    public String user;
+    public Float stars;
+    public String content;
+    public String userId;
+    public String eventId;
 
-    public Review(String seat, Float rate, String text, String user) {
+    public Review(String seat, Float stars, String content, String userId) {
         this.seat = seat;
-        this.rate = rate;
-        this.text = text;
-        this.user = user;
+        this.stars = stars;
+        this.content = content;
+        this.userId = userId;
+        this.docId = null;
+        this.eventId = null;
     }
+
+    public Review(String seat, Float stars, String content, String userId, String docId) {
+        this(seat, stars, content, userId);
+        this.docId = docId;
+    }
+
 
     public Review(Parcel parcel) {
         this( parcel.readString(),parcel.readFloat(),parcel.readString(),parcel.readString());
     }
 
-    public static Review fromJson(Map<String, Object> json) {
+    public static Review fromJson(Map<String, Object> json, String docId) {
         String seat = (String)json.get("Seat");
-        Float rate = (Float)json.get("Stars");
+        Double rateDouble = (Double)json.get("Stars");
+        Float rate = rateDouble.floatValue();
         String text = (String)json.get("Content");
         String user = (String)json.get("UserId");
-
-        return new Review(seat, rate, text, user);
+        String id = docId;
+        return new Review(seat, rate, text, user, id);
     }
 
     public Map<String, Object> toJson() {
         Map<String, Object> json = new HashMap<>();
-        json.put("Stars", getRate());
-        json.put("Content", getText());
+        json.put("Stars", getStars());
+        json.put("Content", getContent());
         json.put("Seat", getSeat());
-        json.put("UserId", getUser());
-        json.put("EventId", "2");
+        json.put("UserId", getUserId());
+        json.put("EventId", getEventId());
 
         return json;
     }
 
-    public String getUser() {
-        return user;
+    public String getDocId() {
+        return docId;
     }
 
-    public Float getRate() {
-        return rate;
+    public String getUserId() {
+        return userId;
+    }
+
+    public Float getStars() {
+        return stars;
     }
 
     public String getSeat() {
         return seat;
     }
 
-    public String getText() {
-        return text;
+    public String getContent() {
+        return content;
     }
+
+    public String getEventId() { return eventId; };
 
     public static final Parcelable.Creator<Review> CREATOR = new Parcelable.Creator<Review>() {
         public Review createFromParcel(Parcel in) {
@@ -76,10 +94,11 @@ public class Review implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(docId);
         dest.writeString(seat);
-        dest.writeFloat(rate);
-        dest.writeString(text);
-        dest.writeString(user);
+        dest.writeFloat(stars);
+        dest.writeString(content);
+        dest.writeString(userId);
     }
 
 }

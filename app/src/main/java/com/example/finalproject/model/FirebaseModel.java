@@ -22,14 +22,28 @@ public class FirebaseModel {
         db.setFirestoreSettings(settings);
     }
 
-    public void getAllReviews(Model.GetAllStudentsListener callback) {
+    public void getAllReviews(Model.GetAllReviewsListener callback) {
         Log.d("noa", "getAllReviews");
         db.collection("reviews").get().addOnCompleteListener((task) -> {
             ArrayList<Review> list = new ArrayList<>();
             if(task.isSuccessful()) {
                 QuerySnapshot jsonsList = task.getResult();
                 for (DocumentSnapshot json: jsonsList) {
-                    Review rv = Review.fromJson(json.getData());
+                    Review rv = Review.fromJson(json.getData(), json.getId());
+                    list.add(rv);
+                }
+            }
+            callback.onComplete(list);
+        });
+    }
+
+    public void getUserReviews(String user, Model.GetUserReviewsListener callback) {
+        db.collection("reviews").whereEqualTo("UserId", user).get().addOnCompleteListener((task) -> {
+            ArrayList<Review> list = new ArrayList<>();
+            if(task.isSuccessful()) {
+                QuerySnapshot jsonsList = task.getResult();
+                for (DocumentSnapshot json: jsonsList) {
+                    Review rv = Review.fromJson(json.getData(), json.getId());
                     list.add(rv);
                 }
             }
@@ -38,10 +52,18 @@ public class FirebaseModel {
     }
 
     public void addReview(Review review, Model.AddReviewListener listener) {
-        db.collection("reviews").add(review.toJson()).addOnCompleteListener((task) -> {
+        db.collection("reviews").add(review.toJson())
+                .addOnCompleteListener((task) -> {
             listener.onComplete();
         });
     }
-    // set - מחפש אם קיים id ומעדכן אותו אחרת יותר חדש
+
+    public void updateReview(Review review, Model.UpdateReviewListener listener) {
+        Log.d("noa",review.getDocId());
+        db.collection("reviews").document(review.getDocId()).update(review.toJson())
+                .addOnCompleteListener(task ->{
+            listener.onComplete();
+        });
+    }
 
 }
