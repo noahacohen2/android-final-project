@@ -46,14 +46,21 @@ public class EditUserProfileFragment extends Fragment {
         binding.bioTp.setText(this.user.getBio());
 
         onSave(view);
+        onCancel();
 
         return view;
     }
 
+    private void onCancel() {
+        NavDirections action = EditUserProfileFragmentDirections.actionEditUserProfileFragmentToUserProfileFragment();
+        binding.cancelEditBtn.setOnClickListener(Navigation.createNavigateOnClickListener(action));
+
+    }
+
     public void onSave(View view){
         binding.saveEditBtn.setOnClickListener(View -> {
-            User editedUser = new User(binding.mailTp.getText().toString(),
-                    this.user.getPassword(),
+            User editedUser = new User(this.user.getPassword(),
+                    binding.mailTp.getText().toString(),
                     binding.firstNameTp.getText().toString(),
                     binding.lastNameTp.getText().toString(),
                     binding.usernameTp.getText().toString(),
