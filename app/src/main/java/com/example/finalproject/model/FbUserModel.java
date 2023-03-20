@@ -22,4 +22,10 @@ public class FbUserModel {
             listener.onComplete();
         });
     }
+
+    public void updateUser(User user, Model.UpdateUserListener listener) {
+        usersCollection.document(user.getUid()).update(user.toJson()).addOnCompleteListener((task) -> {
+            listener.onComplete();
+        });
+    }
 }

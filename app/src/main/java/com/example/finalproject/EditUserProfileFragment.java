@@ -2,9 +2,14 @@ package com.example.finalproject;
 
 import android.os.Bundle;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavDirections;
+import androidx.navigation.Navigation;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.example.finalproject.model.Model;
 import com.example.finalproject.model.User;
 import com.example.finalproject.databinding.FragmentEditUserProfileBinding;
 
@@ -40,12 +45,12 @@ public class EditUserProfileFragment extends Fragment {
         binding.mailTp.setText(this.user.getMail());
         binding.bioTp.setText(this.user.getBio());
 
-        onSave();
+        onSave(view);
 
         return view;
     }
 
-    public void onSave(){
+    public void onSave(View view){
         binding.saveEditBtn.setOnClickListener(View -> {
             User editedUser = new User(binding.mailTp.getText().toString(),
                     this.user.getPassword(),
@@ -53,22 +58,14 @@ public class EditUserProfileFragment extends Fragment {
                     binding.lastNameTp.getText().toString(),
                     binding.usernameTp.getText().toString(),
                     binding.bioTp.getText().toString());
+            editedUser.setUid("xUddApYCDjdysmQZrEeQu9jgNwR2");
 
-            if(saveUserNewData(editedUser)) {
-               // Todo: navigate to profile page
-            } else {
-                showError();
-            }
-
+            saveUserNewData(editedUser, view);
         });
     }
 
-    // todo: show error on screen
-    private void showError() {
-    }
-
-    // TODO: save data to db
-    private boolean saveUserNewData(User editedUser) {
-        return true;
+    private void saveUserNewData(User editedUser, View view) {
+        Model.instance().updateUser(editedUser, () -> Navigation.findNavController(view)
+                .navigate(R.id.action_editUserProfileFragment_to_userProfileFragment));
     }
 }

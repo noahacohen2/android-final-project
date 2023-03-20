@@ -44,14 +44,24 @@ public class Model {
     public void updateReview(Review review, UpdateReviewListener callback) {
         fbReviewModel.updateReview(review, callback);
     }
+
     // End reviews
 
     // User
     public interface AddUserListener {
         void onComplete();
     }
+
+    public interface UpdateUserListener {
+        void onComplete();
+    }
+
     public void createUser(User user, AddUserListener callback) {
         fbUserModel.createUser(user, callback);
+    }
+
+    public void updateUser(User user, UpdateUserListener callback) {
+        fbUserModel.updateUser(user, callback);
     }
      // End User
 }
