@@ -5,7 +5,8 @@ import java.util.ArrayList;
 
 public class Model {
     private static final Model _instance = new Model();
-    private  FirebaseModel firebaseModel = new FirebaseModel();
+    private FbReiviewModel fbReviewModel = new FbReiviewModel();
+    private FbUserModel fbUserModel = new FbUserModel();
 
     public static Model instance() {
         return _instance;
@@ -23,7 +24,7 @@ public class Model {
         void onComplete(ArrayList<Review> data);
     }
     public void getAllReviews(GetAllStudentsListener callback) {
-        firebaseModel.getAllReviews(callback);
+        fbReviewModel.getAllReviews(callback);
 //        return data;
     }
 
@@ -51,8 +52,15 @@ public class Model {
     }
     public void addReview(Review review) {
 //        data.add(review);
-        firebaseModel.addReview(review, ()->{
+        fbReviewModel.addReview(review, ()->{
         Log.d("noa", "add!");
         });
+    }
+
+    public interface AddUserListener {
+        void onComplete();
+    }
+    public void createUser(User user, AddUserListener callback) {
+        fbUserModel.createUser(user, callback);
     }
 }

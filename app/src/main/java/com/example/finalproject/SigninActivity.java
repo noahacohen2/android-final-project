@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.widget.Toast;
 import com.example.finalproject.databinding.ActivitySigninBinding;
+import com.example.finalproject.model.Model;
 import com.example.finalproject.model.User;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -90,8 +91,8 @@ public class SigninActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            // TODO: add to db
-                            changeActivity(MainActivity.class);
+                            Model.instance().createUser(userToAdd, () -> changeActivity(MainActivity.class));
+
                         } else {
                             Toast.makeText(SigninActivity.this, "can not sign you",
                                     Toast.LENGTH_SHORT).show();

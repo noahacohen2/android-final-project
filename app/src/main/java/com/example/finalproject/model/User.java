@@ -1,5 +1,8 @@
 package com.example.finalproject.model;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class User {
     public String username;
     public String password;
@@ -25,6 +28,28 @@ public class User {
         this.lastName = lastName;
         this.username = username;
         this.bio = bio;
+    }
+
+    public static User fromJson(Map<String, Object> json) {
+        String password = (String)json.get("Password");
+        String mail = (String)json.get("Mail");
+        String firstname = (String)json.get("Firstname");
+        String lastname = (String)json.get("Lastname");
+        String username = (String)json.get("Username");
+        String bio = (String)json.get("Bio");
+
+        return new User(password, mail, firstname, lastname, username, bio);
+    }
+
+    public Map<String, Object> toJson() {
+        Map<String, Object> json = new HashMap<>();
+        json.put("Password", this.getPassword());
+        json.put("Mail", this.getMail());
+        json.put("Firstname", this.getFirstName());
+        json.put("Lastname", this.getLastName());
+        json.put("Username", this.getUsername());
+        json.put("Bio", this.getBio());
+        return json;
     }
 
     public String getUsername(){
