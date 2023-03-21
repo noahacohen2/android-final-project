@@ -3,18 +3,14 @@ package com.example.finalproject;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
-import androidx.navigation.NavDirections;
-import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 
-import com.example.finalproject.databinding.FragmentNewReviewBinding;
 import com.example.finalproject.databinding.FragmentReviewsListBinding;
 import com.example.finalproject.model.Review;
 
@@ -54,9 +50,8 @@ public class ReviewsListFragment extends Fragment {
         View view = binding.getRoot();
         binding.progressBar.setVisibility(View.VISIBLE);
 
-        RecyclerView list = view.findViewById(R.id.reviewlistfrag_list);
-        list.setLayoutManager(new LinearLayoutManager(getContext()));
-        list.setHasFixedSize(true);
+        binding.reviewList.setLayoutManager(new LinearLayoutManager(getContext()));
+        binding.reviewList.setHasFixedSize(true);
 
         Bundle args = getArguments();
         if (args != null) {
@@ -64,7 +59,7 @@ public class ReviewsListFragment extends Fragment {
         }
 
         adapter = new ReviewRecyclerAdapter(getLayoutInflater(),data);
-        list.setAdapter(adapter);
+        binding.reviewList.setAdapter(adapter);
 
         adapter.setOnItemClickListener( rowClickListener );
 
