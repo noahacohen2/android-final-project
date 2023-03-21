@@ -41,7 +41,8 @@ public class MusicalsListFragment extends Fragment {
             public void onItemClick(int pos) {
                 Musical mus = data.get(pos);
                 // todo: add musical as param
-                Navigation.findNavController(view).navigate(MusicalsListFragmentDirections.actionMusicalsListFragmentToMusicalFragment());
+                Navigation.findNavController(view)
+                        .navigate(R.id.action_musicalsListFragment_to_musicalFragment);
             }
         });
 
@@ -56,7 +57,8 @@ public class MusicalsListFragment extends Fragment {
 
     void reloadData(){
         binding.progressBar.setVisibility(View.VISIBLE);
-        adapter.setData(Model.instance().getAllMusicals());
+        data = Model.instance().getAllMusicals();
+        adapter.setData(data);
         binding.progressBar.setVisibility(View.GONE);
 
         // todo: add callback
