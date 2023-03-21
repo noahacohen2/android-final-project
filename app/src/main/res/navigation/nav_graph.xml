@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/musicalFragment">
+    app:startDestination="@id/musicalsListFragment">
 
     <fragment
         android:id="@+id/musicalFragment"
@@ -58,5 +58,17 @@
         <action
             android:id="@+id/action_newReviewFragment_to_musicalFragment"
             app:destination="@id/musicalFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/musicalsListFragment"
+        android:name="com.example.finalproject.MusicalsListFragment"
+        android:label="fragment_musicals_list"
+        tools:layout="@layout/fragment_musicals_list" >
+        <action
+            android:id="@+id/action_musicalsListFragment_to_musicalFragment"
+            app:destination="@id/musicalFragment" />
+        <action
+            android:id="@+id/action_musicalsListFragment_to_userProfileFragment"
+            app:destination="@id/userProfileFragment" />
     </fragment>
 </navigation>

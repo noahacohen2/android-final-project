@@ -3,6 +3,7 @@ package com.example.finalproject.model;
 import android.graphics.Bitmap;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Model {
     private static final Model _instance = new Model();
@@ -47,7 +48,19 @@ public class Model {
         fbReviewModel.updateReview(review, callback);
     }
 
-    // End reviews
+    // Musicals
+    public interface GetAllMusicalsListener {
+        void onComplete(ArrayList<Musical> data);
+    }
+
+    // todo: set to void and get real data and add calback param
+    public List<Musical> getAllMusicals() {
+        List<Musical> temp = new ArrayList<>();
+        temp.add(new Musical("Frozen", "lalalallala"));
+        temp.add(new Musical("Lion King", "lbllbblblblbl"));
+
+        return temp;
+    }
 
     // User
     public interface AddUserListener {

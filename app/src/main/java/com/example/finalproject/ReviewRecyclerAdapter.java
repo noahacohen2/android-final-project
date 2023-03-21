@@ -1,20 +1,16 @@
 package com.example.finalproject;
 
 import androidx.recyclerview.widget.RecyclerView;
-
 import android.os.Parcelable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
-
 import com.example.finalproject.model.Review;
 import com.squareup.picasso.Picasso;
-
 import java.util.List;
 
 class ReviewViewHolder extends RecyclerView.ViewHolder{

@@ -2,8 +2,6 @@ package com.example.finalproject.model;
 
 import android.os.Parcel;
 import android.os.Parcelable;
-import android.util.Log;
-
 import java.util.HashMap;
 import java.util.Map;
 
@@ -111,6 +109,6 @@ public class Review implements Parcelable {
         dest.writeString(content);
         dest.writeString(userId);
         dest.writeString(imgUrl);
+        // todo: add eventId here
     }
-
 }

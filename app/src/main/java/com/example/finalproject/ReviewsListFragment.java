@@ -1,23 +1,14 @@
 package com.example.finalproject;
 
 import android.os.Bundle;
-
 import androidx.fragment.app.Fragment;
-import androidx.navigation.NavDirections;
-import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
-
-import com.example.finalproject.databinding.FragmentNewReviewBinding;
 import com.example.finalproject.databinding.FragmentReviewsListBinding;
 import com.example.finalproject.model.Review;
-
 import java.util.ArrayList;
 import java.util.List;
 

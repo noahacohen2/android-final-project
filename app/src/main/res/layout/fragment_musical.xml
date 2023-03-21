@@ -7,7 +7,7 @@
     tools:context=".MusicalFragment">
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/musical_img_iv"
         android:layout_width="113dp"
         android:layout_height="153dp"
         android:layout_marginStart="15dp"
@@ -17,26 +17,26 @@
         app:srcCompat="@drawable/frozen" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/musical_title_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="5dp"
         android:layout_marginTop="15dp"
         android:text="Frozen The Musical"
         android:textSize="20sp"
-        app:layout_constraintStart_toEndOf="@+id/imageView"
+        app:layout_constraintStart_toEndOf="@+id/musical_img_iv"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/musical_description_tv"
         android:layout_width="264dp"
         android:layout_height="119dp"
         android:layout_marginStart="5dp"
         android:layout_marginTop="7dp"
         android:text="Disney’s spectacular staging of the hit movie will thew any frozen heart."
         android:textSize="16sp"
-        app:layout_constraintStart_toEndOf="@+id/imageView"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        app:layout_constraintStart_toEndOf="@+id/musical_img_iv"
+        app:layout_constraintTop_toBottomOf="@+id/musical_title_tv" />
 
     <TextView
         android:id="@+id/textView3"
@@ -50,7 +50,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/imageView5"
-        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+        app:layout_constraintTop_toBottomOf="@+id/musical_img_iv" />
 
     <TextView
         android:id="@+id/textView5"
@@ -115,7 +115,7 @@
         app:layout_constraintEnd_toStartOf="@+id/textView3"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView"
+        app:layout_constraintTop_toBottomOf="@+id/musical_img_iv"
         app:srcCompat="@drawable/clock_icon" />
 
     <ImageView
