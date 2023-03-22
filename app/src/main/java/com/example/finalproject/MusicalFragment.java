@@ -72,7 +72,7 @@ public class MusicalFragment extends Fragment {
         if (reviewListFragment != null) {
             reviewListFragment.setParameters(reviewsList, reviewRowOnClickListener);
         }
-//
+
         reloadData();
 
         LiveDataEvents.instance().EventReviewListReload.observe(getViewLifecycleOwner(), unused -> {
@@ -81,6 +81,12 @@ public class MusicalFragment extends Fragment {
 
         setParameters(MusicalFragmentArgs.fromBundle(getArguments()).getMusical());
 
+        Model.instance().getAllReviews((reviewsData) -> {
+            reviewsList = reviewsData;
+            if (reviewListFragment != null) {
+                reviewListFragment.setParameters(reviewsList, reviewRowOnClickListener);
+            }
+        });
 
         return view;
     }
