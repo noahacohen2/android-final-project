@@ -42,7 +42,7 @@ public class SigninActivity extends AppCompatActivity {
             avatar = ""; //TODO
             if(!isFieldsEmpty(password, mail, firstName, lastName,username, bio)){
                 User userToAdd = new User(password, mail, firstName,
-                        lastName, username, bio, avatar);
+                        lastName, username, bio, Model.instance().userId, avatar);
 
                saveUser(userToAdd);
             }

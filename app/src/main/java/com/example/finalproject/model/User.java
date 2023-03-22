@@ -34,11 +34,11 @@ public class User implements Parcelable {
         setExtraData(firstName, lastName, username, bio);
     }
 
-    public User(String password, String mail, String firstName,
-                String lastName, String username, String bio, String uid) {
-        this(password, mail, firstName, lastName, username, bio);
-        this.uid = uid;
-    }
+//    public User(String password, String mail, String firstName,
+//                String lastName, String username, String bio, String uid) {
+//        this(password, mail, firstName, lastName, username, bio);
+//        this.uid = uid;
+//    }
 
     public User(String password, String mail, String firstName,
                 String lastName, String username, String bio, String uid, String imgUrl) {
@@ -155,7 +155,7 @@ public class User implements Parcelable {
     }
 
     protected User(Parcel in) {
-        this(in.readString(), in.readString(),in.readString(),in.readString(),in.readString(),in.readString(),in.readString());
+        this(in.readString(), in.readString(),in.readString(),in.readString(),in.readString(),in.readString(),in.readString(),in.readString());
     }
 
     public static final Creator<User> CREATOR = new Creator<User>() {

@@ -107,9 +107,10 @@ public class EditUserProfileFragment extends Fragment {
                     binding.firstNameTp.getText().toString(),
                     binding.lastNameTp.getText().toString(),
                     binding.usernameTp.getText().toString(),
-                    binding.bioTp.getText().toString(), "");
+                    binding.bioTp.getText().toString(),
+                    "", user.getImgUrl());
             editedUser.setUid("xUddApYCDjdysmQZrEeQu9jgNwR2");
-            editedUser.setImgUrl(user.getImgUrl());
+//            editedUser.setImgUrl(user.getImgUrl());
 
             if(isImgSelected) {
                 uploadImg(editedUser, (url) -> {
