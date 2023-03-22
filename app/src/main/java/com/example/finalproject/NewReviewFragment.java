@@ -101,13 +101,13 @@ public class NewReviewFragment extends Fragment {
                     uploadImg(rv, (url) -> {
                         if (url != null) {
                             rv.setImgUrl(url);
-                            ReviewModel.instance.addReview(rv, () -> {
+                            ReviewModel.instance.addReview(rv, (unused) -> {
                                 Navigation.findNavController(view1).popBackStack();
                             });
                         }
                     });
                 } else {
-                    ReviewModel.instance.addReview(rv, () -> {
+                    ReviewModel.instance.addReview(rv, (unused) -> {
                         Navigation.findNavController(view1).popBackStack();
                     });
                 }
@@ -117,13 +117,13 @@ public class NewReviewFragment extends Fragment {
                     uploadImg(rv, (url) -> {
                         if (url != null) {
                             rv.setImgUrl(url);
-                            ReviewModel.instance.updateReview(rv, () -> {
+                            ReviewModel.instance.updateReview(rv, (unused) -> {
                                 Navigation.findNavController(view1).popBackStack();
                             });
                         }
                     });
                 } else {
-                    ReviewModel.instance.updateReview(rv, () -> {
+                    ReviewModel.instance.updateReview(rv, (unused) -> {
                         Navigation.findNavController(view1).popBackStack();
                     });
                 }

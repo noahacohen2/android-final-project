@@ -95,7 +95,7 @@ public class SigninActivity extends AppCompatActivity {
                             String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
                             userToAdd.setUid(uid);
                             UserModel.instance.setUserId(uid);
-                            UserModel.instance.createUser(userToAdd, () -> changeActivity(MainActivity.class));
+                            UserModel.instance.createUser(userToAdd, (unused) -> changeActivity(MainActivity.class));
 
                         } else {
                             Toast.makeText(SigninActivity.this, "can not sign you",

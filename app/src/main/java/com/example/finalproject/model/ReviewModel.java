@@ -18,7 +18,7 @@ public class ReviewModel {
         void onComplete(ArrayList<Review> data);
     }
 
-    public void getAllMusicalReviews(Integer eventId, GetAllReviewsListener callback) {
+    public void getAllMusicalReviews(Integer eventId, Model.Listener<ArrayList<Review>> callback) {
         fbReviewModel.getAllMusicalReviews(eventId,callback);
     }
 
@@ -56,31 +56,17 @@ public class ReviewModel {
     public interface AddReviewListener {
         void onComplete();
     }
-    public void addReview(Review review, AddReviewListener callback) {
-        fbReviewModel.addReview(review, () -> {
+    public void addReview(Review review, Model.Listener<Void> callback) {
+        fbReviewModel.addReview(review, (unused) -> {
             refreshAllUserReviews();
-            callback.onComplete();
+            callback.onComplete(null);
         });
     }
 
     public interface UpdateReviewListener {
         void onComplete();
     }
-    public void updateReview(Review review, UpdateReviewListener callback) {
+    public void updateReview(Review review, Model.Listener<Void> callback) {
         fbReviewModel.updateReview(review, callback);
     }
-
-    // Musicals
-    public interface GetAllMusicalsListener {
-        void onComplete(ArrayList<Musical> data);
-    }
-
-//    // todo: set to void and get real data and add calback param
-//    public List<Musical> getAllMusicals() {
-//        List<Musical> temp = new ArrayList<>();
-//        temp.add(new Musical("Frozen", "lalalallala", "2 hours", "lalalalalalalalalalalalalalalalala", "from 20$", "NY"));
-//        temp.add(new Musical("Lion King", "lbllbblblblbl", "2 hours", "lalalalalalalalalalalalalalalalala", "from 20$", "NY"));
-//
-//        return temp;
-//    }
 }

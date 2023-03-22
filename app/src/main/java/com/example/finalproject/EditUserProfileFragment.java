@@ -126,7 +126,7 @@ public class EditUserProfileFragment extends Fragment {
     }
 
     private void saveUserNewData(User editedUser, View view) {
-        UserModel.instance.updateUser(editedUser, () -> Navigation.findNavController(view)
+        UserModel.instance.updateUser(editedUser, (unused) -> Navigation.findNavController(view)
                 .navigate(R.id.action_editUserProfileFragment_to_userProfileFragment));
     }
 }
