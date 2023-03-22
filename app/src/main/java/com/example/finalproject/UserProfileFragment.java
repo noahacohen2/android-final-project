@@ -46,7 +46,7 @@ public class UserProfileFragment extends Fragment {
                              Bundle savedInstanceState) {
         binding = FragmentUserProfileBinding.inflate(inflater,container,false);
         View view = binding.getRoot();
-
+        binding.userProgressBar.setVisibility(View.VISIBLE);
         ReviewsListFragment reviewListFragment = (ReviewsListFragment) getChildFragmentManager().findFragmentById(R.id.listContainer);
 
         ReviewRecyclerAdapter.OnItemClickListener reviewRowOnClickListener = new ReviewRecyclerAdapter.OnItemClickListener() {
@@ -86,6 +86,8 @@ public class UserProfileFragment extends Fragment {
             } else {
                 binding.avatarImg.setImageResource(R.drawable.bear);
             }
+
+            binding.userProgressBar.setVisibility(View.GONE);
         });
 
         binding.editBtn.setOnClickListener(view1 -> {

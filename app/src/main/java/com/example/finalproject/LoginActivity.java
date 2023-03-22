@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.view.View;
 import android.widget.Toast;
 import com.example.finalproject.databinding.ActivityLoginBinding;
 import com.example.finalproject.model.UserModel;
@@ -41,6 +42,8 @@ public class LoginActivity extends AppCompatActivity {
 
         onNotSingedIn();
         onLogin();
+
+        binding.loginProgressBar.setVisibility(View.GONE);
     }
 
     private void onNotSingedIn() {
@@ -51,7 +54,7 @@ public class LoginActivity extends AppCompatActivity {
 
    public void onLogin(){
        binding.loginBtn.setOnClickListener(View -> {
-
+           binding.loginProgressBar.setVisibility(View.VISIBLE);
            String mail, password;
            mail = String.valueOf(binding.mailTp.getText());
            password = String.valueOf(binding.passwordTp.getText());

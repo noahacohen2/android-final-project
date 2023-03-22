@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.view.View;
 import android.widget.Toast;
 import com.example.finalproject.databinding.ActivitySigninBinding;
 import com.example.finalproject.model.User;
@@ -27,10 +28,12 @@ public class SigninActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         onSignin();
+        binding.signInProgressBar.setVisibility(View.GONE);
     }
 
     private void onSignin() {
         binding.signinBtn.setOnClickListener(View -> {
+            binding.signInProgressBar.setVisibility(View.VISIBLE);
             String password, mail, firstName, lastName, bio, avatar;
             password = String.valueOf(binding.passwordTp.getText());
             firstName = String.valueOf(binding.firstNameTp.getText());
