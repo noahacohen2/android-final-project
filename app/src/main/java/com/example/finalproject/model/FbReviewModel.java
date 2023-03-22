@@ -1,6 +1,5 @@
 package com.example.finalproject.model;
 
-import android.util.Log;
 import com.google.firebase.Timestamp;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -39,7 +38,6 @@ public class FbReviewModel {
             if(task.isSuccessful()) {
                 QuerySnapshot jsonsList = task.getResult();
                 for (DocumentSnapshot json: jsonsList) {
-                    Log.d("noa", json.toString());
                     Review rv = Review.fromJson(json.getData(), json.getId());
                     list.add(rv);
                 }

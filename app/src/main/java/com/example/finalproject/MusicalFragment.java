@@ -4,14 +4,12 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavDirections;
 import androidx.navigation.Navigation;
-
 import com.example.finalproject.databinding.FragmentMusicalBinding;
 import com.example.finalproject.model.LiveDataEvents;
 import com.example.finalproject.model.Musical;
 import com.example.finalproject.model.Review;
 import com.example.finalproject.model.ReviewModel;
 import com.squareup.picasso.Picasso;
-
 import android.os.Bundle;
 import android.os.Parcel;
 import android.view.LayoutInflater;

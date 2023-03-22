@@ -1,7 +1,6 @@
 package com.example.finalproject.model;
 
 import androidx.lifecycle.LiveData;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Executor;

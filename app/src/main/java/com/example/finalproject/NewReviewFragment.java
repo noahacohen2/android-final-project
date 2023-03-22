@@ -18,7 +18,6 @@ import com.example.finalproject.model.Review;
 import com.example.finalproject.model.ReviewModel;
 import com.example.finalproject.model.UserModel;
 import com.squareup.picasso.Picasso;
-
 import java.util.UUID;
 
 public class NewReviewFragment extends Fragment {
