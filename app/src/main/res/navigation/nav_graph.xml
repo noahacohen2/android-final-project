@@ -55,6 +55,10 @@
             android:name="Review"
             app:argType="com.example.finalproject.model.Review"
             app:nullable="true"/>
+        <argument
+            android:name="eventId"
+            app:argType="java.lang.Integer"
+            app:nullable="true"/>
         <action
             android:id="@+id/action_newReviewFragment_to_musicalFragment"
             app:destination="@id/musicalFragment" />

@@ -46,9 +46,6 @@ public class MusicalFragment extends Fragment {
         binding = FragmentMusicalBinding.inflate(inflater, container, false);
         View view = binding.getRoot();
 
-        NavDirections action = MusicalFragmentDirections.actionMusicalFragmentToNewReviewFragment(null);
-        binding.addReviewBtn.setOnClickListener(Navigation.createNavigateOnClickListener(action));
-
         reviewListFragment = (ReviewsListFragment) getChildFragmentManager().findFragmentById(R.id.musicalFc);
 
         reviewRowOnClickListener = new ReviewRecyclerAdapter.OnItemClickListener() {
@@ -70,6 +67,8 @@ public class MusicalFragment extends Fragment {
         if (reviewListFragment != null) {
             reviewListFragment.setParameters(reviewsList, reviewRowOnClickListener);
         }
+        setParameters(MusicalFragmentArgs.fromBundle(getArguments()).getMusical());
+        initScreen();
 
         reloadData();
 
@@ -77,22 +76,21 @@ public class MusicalFragment extends Fragment {
             reloadData();
         });
 
-        setParameters(MusicalFragmentArgs.fromBundle(getArguments()).getMusical());
-
-        initScreen();
-
-        ReviewModel.instance.getAllReviews((reviewsData) -> {
+        ReviewModel.instance.getAllMusicalReviews(currMusical.getId(),(reviewsData) -> {
             reviewsList = reviewsData;
             if (reviewListFragment != null) {
                 reviewListFragment.setParameters(reviewsList, reviewRowOnClickListener);
             }
         });
 
+        NavDirections action = MusicalFragmentDirections.actionMusicalFragmentToNewReviewFragment(null, currMusical.getId());
+        binding.addReviewBtn.setOnClickListener(Navigation.createNavigateOnClickListener(action));
+
         return view;
     }
 
     void reloadData() {
-        ReviewModel.instance.getAllReviews((reviewsData) -> {
+        ReviewModel.instance.getAllMusicalReviews(currMusical.getId(),(reviewsData) -> {
             reviewsList = reviewsData;
             if (reviewListFragment != null) {
                 reviewListFragment.setParameters(reviewsList, reviewRowOnClickListener);

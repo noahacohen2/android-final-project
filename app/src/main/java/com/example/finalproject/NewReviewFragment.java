@@ -27,15 +27,18 @@ public class NewReviewFragment extends Fragment {
     ActivityResultLauncher<Void> cameraLauncher;
     Review currentReview;
     Boolean isImgSelected = false;
-    String eventId; //TODO: get from daniel's screen
+    Integer eventId; //TODO: get from daniel's screen
 
-    private void setParameters(Review rv) {
+    private void setParameters(Review rv, Integer eventId) {
         this.currentReview = rv;
+        this.eventId = eventId;
     }
-    public static NewReviewFragment newInstance(Review rv){
+
+    public static NewReviewFragment newInstance(Review rv, Integer eventId){
         NewReviewFragment frag = new NewReviewFragment();
         Bundle bundle = new Bundle();
         bundle.putParcelable("Review",rv);
+        bundle.putInt("EventId",eventId);
         frag.setArguments(bundle);
         return frag;
     }
@@ -69,7 +72,7 @@ public class NewReviewFragment extends Fragment {
         binding = FragmentNewReviewBinding.inflate(inflater,container,false);
         View view = binding.getRoot();
 
-        setParameters(NewReviewFragmentArgs.fromBundle(getArguments()).getReview());
+        setParameters(NewReviewFragmentArgs.fromBundle(getArguments()).getReview(), NewReviewFragmentArgs.fromBundle(getArguments()).getEventId());
 
         cameraLauncher = registerForActivityResult(new ActivityResultContracts.TakePicturePreview(), new ActivityResultCallback<Bitmap>() {
             @Override
