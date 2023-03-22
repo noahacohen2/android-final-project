@@ -70,7 +70,7 @@ public class NewReviewFragment extends Fragment {
                              Bundle savedInstanceState) {
         binding = FragmentNewReviewBinding.inflate(inflater,container,false);
         View view = binding.getRoot();
-
+        binding.editProgressBar.setVisibility(View.GONE);
         setParameters(NewReviewFragmentArgs.fromBundle(getArguments()).getReview(), NewReviewFragmentArgs.fromBundle(getArguments()).getEventId());
 
         cameraLauncher = registerForActivityResult(new ActivityResultContracts.TakePicturePreview(), new ActivityResultCallback<Bitmap>() {
@@ -88,6 +88,7 @@ public class NewReviewFragment extends Fragment {
         });
 
         binding.saveBtn.setOnClickListener(view1 -> {
+            binding.editProgressBar.setVisibility(View.VISIBLE);
             String seat = binding.seatEt.getText().toString();
             Float rate = binding.starsRating.getRating();
             String content = binding.contentEt.getText().toString();
