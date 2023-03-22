@@ -16,10 +16,9 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.finalproject.model.ImageModel;
-import com.example.finalproject.model.Model;
-import com.example.finalproject.model.Review;
 import com.example.finalproject.model.User;
 import com.example.finalproject.databinding.FragmentEditUserProfileBinding;
+import com.example.finalproject.model.UserModel;
 import com.squareup.picasso.Picasso;
 
 public class EditUserProfileFragment extends Fragment {
@@ -127,7 +126,7 @@ public class EditUserProfileFragment extends Fragment {
     }
 
     private void saveUserNewData(User editedUser, View view) {
-        Model.instance().updateUser(editedUser, () -> Navigation.findNavController(view)
+        UserModel.instance.updateUser(editedUser, () -> Navigation.findNavController(view)
                 .navigate(R.id.action_editUserProfileFragment_to_userProfileFragment));
     }
 }

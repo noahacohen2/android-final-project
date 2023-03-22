@@ -7,22 +7,19 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.navigation.NavDirections;
 import androidx.navigation.Navigation;
 import android.os.Parcel;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import com.example.finalproject.databinding.FragmentUserProfileBinding;
 import com.example.finalproject.model.LiveDataEvents;
-import com.example.finalproject.model.Model;
 import com.example.finalproject.model.Review;
+import com.example.finalproject.model.ReviewModel;
 import com.example.finalproject.model.User;
+import com.example.finalproject.model.UserModel;
 import com.google.firebase.auth.FirebaseAuth;
 import com.squareup.picasso.Picasso;
-
-import java.util.ArrayList;
 
 public class UserProfileFragment extends Fragment {
     FragmentUserProfileBinding binding;
@@ -78,7 +75,7 @@ public class UserProfileFragment extends Fragment {
             reviewListFragment.setParameters(list, reviewRowOnClickListener);
         });
 
-        Model.instance().getUserData(user -> {
+        UserModel.instance.getUserData(user -> {
             binding.usernameTv.setText(user.getFirstName() + " " + user.getLastName());
             binding.mailTv.setText(user.getMail());
             binding.bioTv.setText(user.getBio());
@@ -117,7 +114,7 @@ public class UserProfileFragment extends Fragment {
 //            binding.avatarImg.setImageResource(R.drawable.bear);
 //        }
         LiveDataEvents.instance().EventReviewListReload.observe(getViewLifecycleOwner(),unused->{
-            Model.instance().refreshAllUserReviews();
+            ReviewModel.instance.refreshAllUserReviews();
         });
 
         return view;
