@@ -7,13 +7,12 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.widget.Toast;
 import com.example.finalproject.databinding.ActivitySigninBinding;
-import com.example.finalproject.model.Model;
 import com.example.finalproject.model.User;
+import com.example.finalproject.model.UserModel;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 
 public class SigninActivity extends AppCompatActivity {
 
@@ -42,7 +41,7 @@ public class SigninActivity extends AppCompatActivity {
             avatar = ""; //TODO
             if(!isFieldsEmpty(password, mail, firstName, lastName,username, bio)){
                 User userToAdd = new User(password, mail, firstName,
-                        lastName, username, bio, Model.instance().userId, avatar);
+                        lastName, username, bio, UserModel.instance.userId, avatar);
 
                saveUser(userToAdd);
             }
@@ -95,8 +94,8 @@ public class SigninActivity extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
                             userToAdd.setUid(uid);
-                            Model.instance().userId = uid;
-                            Model.instance().createUser(userToAdd, () -> changeActivity(MainActivity.class));
+                            UserModel.instance.setUserId(uid);
+                            UserModel.instance.createUser(userToAdd, () -> changeActivity(MainActivity.class));
 
                         } else {
                             Toast.makeText(SigninActivity.this, "can not sign you",

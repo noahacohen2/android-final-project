@@ -7,9 +7,10 @@ import androidx.navigation.Navigation;
 
 import com.example.finalproject.databinding.FragmentMusicalBinding;
 import com.example.finalproject.model.LiveDataEvents;
-import com.example.finalproject.model.Model;
 import com.example.finalproject.model.Musical;
 import com.example.finalproject.model.Review;
+import com.example.finalproject.model.ReviewModel;
+
 import android.os.Bundle;
 import android.os.Parcel;
 import android.view.LayoutInflater;
@@ -81,7 +82,7 @@ public class MusicalFragment extends Fragment {
     }
 
     void reloadData() {
-        Model.instance().getAllReviews((reviewsData) -> {
+        ReviewModel.instance.getAllReviews((reviewsData) -> {
             reviewsList = reviewsData;
             if (reviewListFragment != null) {
                 reviewListFragment.setParameters(reviewsList, reviewRowOnClickListener);

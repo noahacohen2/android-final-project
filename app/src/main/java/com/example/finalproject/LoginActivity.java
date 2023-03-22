@@ -7,7 +7,7 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.widget.Toast;
 import com.example.finalproject.databinding.ActivityLoginBinding;
-import com.example.finalproject.model.Model;
+import com.example.finalproject.model.UserModel;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -25,7 +25,7 @@ public class LoginActivity extends AppCompatActivity {
             // Check if user is signed in (non-null) and update UI accordingly.
             FirebaseUser currentUser = mAuth.getCurrentUser();
             if(currentUser != null){
-                Model.instance().userId = currentUser.getUid();
+                UserModel.instance.setUserId(currentUser.getUid());
                 changeActivity(MainActivity.class);
             }
         }
@@ -76,7 +76,7 @@ public class LoginActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            Model.instance().userId = task.getResult().getUser().getUid();
+                            UserModel.instance.setUserId(task.getResult().getUser().getUid());
                             changeActivity(MainActivity.class);
                         } else {
                             // If sign in fails, display a message to the user.

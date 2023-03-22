@@ -19,7 +19,7 @@ public class FbImgModel {
         storage = FirebaseStorage.getInstance();
     }
 
-    void uploadImage(String name, Bitmap bitmap, Model.UploadImageListener listener ){
+    void uploadImage(String name, Bitmap bitmap, ImageModel.UploadImageListener listener ){
         StorageReference storageRef = storage.getReference();
         StorageReference imagesRef = storageRef.child("images/"+name +".jpg");
 
