@@ -1,6 +1,8 @@
 package com.example.finalproject.model;
 
 import android.util.Log;
+
+import com.google.firebase.Timestamp;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreSettings;
@@ -33,8 +35,11 @@ public class FbReviewModel {
         });
     }
 
-    public void getUserReviews(String user, Model.GetUserReviewsListener callback) {
-        db.collection("reviews").whereEqualTo("UserId", user).get().addOnCompleteListener((task) -> {
+    public void getUserReviewsSince(Long since, String user, Model.GetUserReviewsListener callback) {
+        Log.d("noa-timestemp",new Timestamp(since,0).toDate().toString());
+        Log.d("noa-user",user);
+
+        db.collection("reviews").whereEqualTo("UserId", user).whereGreaterThanOrEqualTo("lastUpdated", new Timestamp(since,0)).get().addOnCompleteListener((task) -> {
             ArrayList<Review> list = new ArrayList<>();
             if(task.isSuccessful()) {
                 QuerySnapshot jsonsList = task.getResult();

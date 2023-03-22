@@ -1,14 +1,23 @@
 package com.example.finalproject.model;
 
 import android.graphics.Bitmap;
+import android.util.Log;
+
+import androidx.lifecycle.LiveData;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
 
 public class Model {
+    private Executor executor = Executors.newSingleThreadExecutor();
     private static final Model _instance = new Model();
     private FbReviewModel fbReviewModel = new FbReviewModel();
     private FbUserModel fbUserModel = new FbUserModel();
     private  FbImgModel fbImgModel = new FbImgModel();
+    AppLocalDbRepository localDb = AppLocalDb.getAppDb();
+
 
     public static Model instance() {
         return _instance;
@@ -29,15 +38,48 @@ public class Model {
     public interface GetUserReviewsListener {
         void onComplete(ArrayList<Review> data);
     }
-    public void getUserReviews(String user, GetUserReviewsListener callback) {
-        fbReviewModel.getUserReviews(user,callback);
+
+    private LiveData<List<Review>> userReviewList;
+    public LiveData<List<Review>> getUserReviews(String userId) {
+        if(userReviewList == null){
+            userReviewList = localDb.reviewDao().getUserReviews(userId);
+            refreshAllUserReviews(userId);
+        }
+        return userReviewList;
+    }
+    public void refreshAllUserReviews(String user) {
+        Long localLastUSerReviewUpdate = User.getLocalLastReviewUpdate();
+        Log.d("noa-time", localLastUSerReviewUpdate.toString());
+        fbReviewModel.getUserReviewsSince(localLastUSerReviewUpdate,user,list -> {
+            executor.execute(()-> {
+                Long time = localLastUSerReviewUpdate;
+                for (Review rv : list) {
+                    Log.d("noa", rv.getDocId());
+                    localDb.reviewDao().insertAll(rv);
+
+                    if (time < rv.getLastUpdated()) {
+                        time = rv.getLastUpdated();
+                    }
+                }
+
+                User.setLocalLastReviewUpdate(time);
+//            TODO
+//                EventStudentsListLoadingState.postValue(LoadingState.NOT_LOADING);
+            });
+        });
+
     }
 
     public interface AddReviewListener {
         void onComplete();
     }
     public void addReview(Review review, AddReviewListener callback) {
-        fbReviewModel.addReview(review, callback);
+        fbReviewModel.addReview(review, () -> {
+            //TODO;
+            refreshAllUserReviews("1");
+            callback.onComplete();
+        });
+
     }
 
     public interface UpdateReviewListener {
