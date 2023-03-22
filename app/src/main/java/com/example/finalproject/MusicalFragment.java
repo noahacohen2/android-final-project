@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.NavDirections;
 import androidx.navigation.Navigation;
 import com.example.finalproject.model.Model;
+import com.example.finalproject.model.Musical;
 import com.example.finalproject.model.Review;
 import android.os.Bundle;
 import android.os.Parcel;
@@ -17,10 +18,15 @@ import java.util.ArrayList;
 public class MusicalFragment extends Fragment {
     ArrayList<Review> reviewsList = new ArrayList<>();
     ReviewsListFragment reviewListFragment;
+    Musical currMusical;
 
     public static MusicalFragment newInstance(String musicalId, String param2) {
         MusicalFragment fragment = new MusicalFragment();
         return fragment;
+    }
+
+    private void setParameters(Musical musical) {
+        this.currMusical = musical;
     }
 
     @Override
@@ -68,6 +74,8 @@ public class MusicalFragment extends Fragment {
                 reviewListFragment.setParameters(reviewsList, reviewRowOnClickListener);
             }
         });
+
+        setParameters(MusicalFragmentArgs.fromBundle(getArguments()).getMusical());
 
         return view;
     }

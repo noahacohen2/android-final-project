@@ -120,6 +120,7 @@ public class Musical implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int i) {
+        dest.writeInt(id);
         dest.writeString(title);
         dest.writeString(description);
         dest.writeString(time);

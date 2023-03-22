@@ -11,7 +11,6 @@ import android.view.ViewGroup;
 import com.example.finalproject.databinding.FragmentMusicalsListBinding;
 import com.example.finalproject.model.MusicalModel;
 import com.example.finalproject.model.Musical;
-
 import java.util.LinkedList;
 import java.util.List;
 
@@ -44,10 +43,11 @@ public class MusicalsListFragment extends Fragment {
 
             @Override
             public void onItemClick(int pos) {
-//                Musical mus = data.get(pos);
-                // todo: add musical as param
+                Bundle bundle = new Bundle();
+                Musical mus = data.getValue().get(pos);
+                bundle.putParcelable("Musical", mus);
                 Navigation.findNavController(view)
-                        .navigate(R.id.action_musicalsListFragment_to_musicalFragment);
+                        .navigate(R.id.action_musicalsListFragment_to_musicalFragment, bundle);
             }
         });
 
