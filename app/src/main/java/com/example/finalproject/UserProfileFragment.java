@@ -103,7 +103,12 @@ public class UserProfileFragment extends Fragment {
                 changeActivity(LoginActivity.class);
             }
         });
-//
+
+
+        if (reviewListFragment != null) {
+            reviewListFragment.setParameters(viewModel.getReviewListData().getValue(), reviewRowOnClickListener);
+        }
+        //
 //        // todo: change temp user
 //
 //        User user = new User( "123456","lal@gmail.com", "daniel",

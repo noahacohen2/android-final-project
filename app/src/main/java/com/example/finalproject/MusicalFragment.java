@@ -69,6 +69,10 @@ public class MusicalFragment extends Fragment {
             }
         };
 
+        if (reviewListFragment != null) {
+            reviewListFragment.setParameters(reviewsList, reviewRowOnClickListener);
+        }
+//
         reloadData();
 
         LiveDataEvents.instance().EventReviewListReload.observe(getViewLifecycleOwner(), unused -> {
