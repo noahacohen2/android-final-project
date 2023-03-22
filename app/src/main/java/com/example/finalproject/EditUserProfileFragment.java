@@ -15,6 +15,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.finalproject.model.ImageModel;
 import com.example.finalproject.model.Model;
 import com.example.finalproject.model.Review;
 import com.example.finalproject.model.User;
@@ -87,11 +88,11 @@ public class EditUserProfileFragment extends Fragment {
         });
     }
 
-    private void uploadImg(User user, Model.UploadImageListener callback) {
+    private void uploadImg(User user, ImageModel.UploadImageListener callback) {
             binding.userImg.setDrawingCacheEnabled(true);
             binding.userImg.buildDrawingCache();
             Bitmap bitmap = ((BitmapDrawable) binding.userImg.getDrawable()).getBitmap();
-            Model.instance().uploadImage(user.getUid(), bitmap, callback);
+            ImageModel.instance.uploadImage(user.getUid(), bitmap, callback);
     }
 
     private void onCancel() {

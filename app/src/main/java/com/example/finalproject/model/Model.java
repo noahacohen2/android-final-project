@@ -1,7 +1,6 @@
 package com.example.finalproject.model;
 
 import android.graphics.Bitmap;
-import android.util.Log;
 import androidx.lifecycle.LiveData;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,14 +15,12 @@ public class Model {
 
     private FbReviewModel fbReviewModel = new FbReviewModel();
     private FbUserModel fbUserModel = new FbUserModel();
-    private  FbImgModel fbImgModel = new FbImgModel();
 
     public static Model instance() {
         return _instance;
     }
 
-    private Model() {
-    }
+    private Model() {}
 
     // Reviews
     public interface GetAllReviewsListener {
@@ -120,13 +117,4 @@ public class Model {
     public void updateUser(User user, UpdateUserListener callback) {
         fbUserModel.updateUser(user, callback);
     }
-
-    // Images
-    public interface UploadImageListener{
-        void onComplete(String uri);
-    }
-    public void uploadImage(String name, Bitmap bitmap, UploadImageListener callback) {
-        fbImgModel.uploadImage(name, bitmap, callback);
-    }
-    //End Images
 }

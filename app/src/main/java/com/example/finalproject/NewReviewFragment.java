@@ -17,6 +17,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.finalproject.databinding.FragmentNewReviewBinding;
+import com.example.finalproject.model.ImageModel;
 import com.example.finalproject.model.Model;
 import com.example.finalproject.model.Review;
 import com.squareup.picasso.Picasso;
@@ -58,11 +59,11 @@ public class NewReviewFragment extends Fragment {
         }
     }
 
-    private void uploadImg(Review rv, Model.UploadImageListener callback) {
+    private void uploadImg(Review rv, ImageModel.UploadImageListener callback) {
             binding.addImgBtn.setDrawingCacheEnabled(true);
             binding.addImgBtn.buildDrawingCache();
             Bitmap bitmap = ((BitmapDrawable)  binding.addImgBtn.getDrawable()).getBitmap();
-            Model.instance().uploadImage(rv.getDocId(), bitmap, callback);
+            ImageModel.instance.uploadImage(rv.getDocId(), bitmap, callback);
     }
 
     @Override
