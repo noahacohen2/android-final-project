@@ -86,12 +86,11 @@ public class SigninActivity extends AppCompatActivity {
                 .addOnCompleteListener( new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
+                        if (task.isSuccessful()){
                             String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
                             userToAdd.setUid(uid);
                             UserModel.instance.setUserId(uid);
                             UserModel.instance.createUser(userToAdd, () -> changeActivity(MainActivity.class));
-
                         } else {
                             Toast.makeText(SigninActivity.this, "can not sign you",
                                     Toast.LENGTH_SHORT).show();
