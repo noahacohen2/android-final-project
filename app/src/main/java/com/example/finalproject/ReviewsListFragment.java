@@ -1,11 +1,7 @@
 package com.example.finalproject;
 
-import android.content.Context;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.view.LayoutInflater;
@@ -13,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.finalproject.databinding.FragmentReviewsListBinding;
+import com.example.finalproject.model.LiveDataEvents;
 import com.example.finalproject.model.Review;
 
 import java.util.ArrayList;
@@ -31,6 +28,7 @@ public class ReviewsListFragment extends Fragment {
             adapter.setData(reviews);
             adapter.notifyDataSetChanged();
             binding.progressBar.setVisibility(View.GONE);
+            binding.swipeRefresh.setRefreshing(false);
         }
     }
 
@@ -63,6 +61,10 @@ public class ReviewsListFragment extends Fragment {
         binding.reviewList.setAdapter(adapter);
 
         adapter.setOnItemClickListener( rowClickListener );
+
+        binding.swipeRefresh.setOnRefreshListener(()->{
+            LiveDataEvents.instance().EventReviewListReload.setValue(null);
+        });
 
         return view;
     }

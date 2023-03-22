@@ -71,6 +71,7 @@ import androidx.navigation.NavDirections;
 import androidx.navigation.Navigation;
 
 import com.example.finalproject.databinding.FragmentMusicalBinding;
+import com.example.finalproject.model.LiveDataEvents;
 import com.example.finalproject.model.Model;
 import com.example.finalproject.model.Review;
 import android.os.Bundle;
@@ -85,6 +86,7 @@ public class MusicalFragment extends Fragment {
     ArrayList<Review> reviewsList = new ArrayList<>();
     ReviewsListFragment reviewListFragment;
     FragmentMusicalBinding binding;
+    ReviewRecyclerAdapter.OnItemClickListener reviewRowOnClickListener;
 
     public static MusicalFragment newInstance(String musicalId, String param2) {
         MusicalFragment fragment = new MusicalFragment();
@@ -108,7 +110,7 @@ public class MusicalFragment extends Fragment {
 
         reviewListFragment = (ReviewsListFragment) getChildFragmentManager().findFragmentById(R.id.musicalFc);
 
-        ReviewRecyclerAdapter.OnItemClickListener reviewRowOnClickListener = new ReviewRecyclerAdapter.OnItemClickListener() {
+        reviewRowOnClickListener = new ReviewRecyclerAdapter.OnItemClickListener() {
 
             @Override
             public void onItemClick(int pos) {
@@ -126,17 +128,21 @@ public class MusicalFragment extends Fragment {
             }
         };
 
-        if (reviewListFragment != null) {
-            reviewListFragment.setParameters(reviewsList, reviewRowOnClickListener);
-        }
+        reloadData();
 
+        LiveDataEvents.instance().EventReviewListReload.observe(getViewLifecycleOwner(),unused->{
+            reloadData();
+        });
+
+        return view;
+    }
+
+    void reloadData(){
         Model.instance().getAllReviews((reviewsData) -> {
             reviewsList = reviewsData;
             if (reviewListFragment != null) {
                 reviewListFragment.setParameters(reviewsList, reviewRowOnClickListener);
             }
         });
-
-        return view;
     }
 }

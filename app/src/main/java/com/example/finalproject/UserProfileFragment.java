@@ -10,11 +10,12 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavDirections;
 import androidx.navigation.Navigation;
 import android.os.Parcel;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import com.example.finalproject.databinding.FragmentUserProfileBinding;
+import com.example.finalproject.model.LiveDataEvents;
+import com.example.finalproject.model.Model;
 import com.example.finalproject.model.Review;
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -75,10 +76,6 @@ public class UserProfileFragment extends Fragment {
         });
 
 
-        if (reviewListFragment != null) {
-            reviewListFragment.setParameters(viewModel.getData().getValue(), reviewRowOnClickListener);
-        }
-
         NavDirections action = UserProfileFragmentDirections.actionUserProfileFragmentToEditUserProfileFragment();
         binding.editBtn.setOnClickListener(Navigation.createNavigateOnClickListener(action));
         binding.logoutBtn.setOnClickListener(new View.OnClickListener() {
@@ -87,6 +84,11 @@ public class UserProfileFragment extends Fragment {
                 mAuth.signOut();
                 changeActivity(LoginActivity.class);
             }
+        });
+
+        LiveDataEvents.instance().EventReviewListReload.observe(getViewLifecycleOwner(),unused->{
+            //TODO: cange user
+            Model.instance().refreshAllUserReviews("1");
         });
 
         return view;
