@@ -9,9 +9,9 @@
 
     <ImageView
         android:id="@+id/user_img"
-        android:layout_width="197dp"
-        android:layout_height="127dp"
-        android:layout_marginTop="16dp"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_marginTop="5dp"
         android:src="@drawable/bear"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -40,7 +40,6 @@
         android:id="@+id/first_name_tp"
         android:layout_width="228dp"
         android:layout_height="37dp"
-        android:layout_marginTop="20dp"
         android:background="@drawable/edit_text_rect"
         android:ems="10"
         android:inputType="textPersonName"
@@ -50,32 +49,14 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.75"
         app:layout_constraintStart_toEndOf="@+id/first_name_tv"
-        app:layout_constraintTop_toBottomOf="@+id/username_tp"
-        tools:ignore="MissingConstraints" />
-
-    <EditText
-        android:id="@+id/username_tp"
-        android:layout_width="231dp"
-        android:layout_height="35dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="16dp"
-        android:background="@drawable/edit_text_rect"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/username_tv"
-        app:layout_constraintTop_toBottomOf="@+id/mail_tp"
-        tools:ignore="MissingConstraints" />
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteY="247dp" />
 
     <EditText
         android:id="@+id/last_name_tp"
         android:layout_width="228dp"
         android:layout_height="37dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="28dp"
         android:background="@drawable/edit_text_rect"
         android:ems="10"
         android:inputType="textPersonName"
@@ -92,7 +73,7 @@
         android:id="@+id/bio_tp"
         android:layout_width="224dp"
         android:layout_height="90dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="24dp"
         android:background="@drawable/edit_text_rect"
         android:ems="10"
         android:inputType="textPersonName"
@@ -100,7 +81,7 @@
         android:paddingRight="10dp"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.921"
+        app:layout_constraintHorizontal_bias="0.929"
         app:layout_constraintStart_toEndOf="@+id/bio_tv"
         app:layout_constraintTop_toBottomOf="@+id/last_name_tp"
         tools:ignore="MissingConstraints" />
@@ -110,7 +91,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="28dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="28dp"
         android:text="Bio:"
         android:textColor="#000000"
         android:textSize="27sp"
@@ -132,24 +113,11 @@
         tools:ignore="MissingConstraints" />
 
     <TextView
-        android:id="@+id/username_tv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="28dp"
-        android:layout_marginTop="24dp"
-        android:text="Username:"
-        android:textColor="#000000"
-        android:textSize="27sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/mail_tv"
-        tools:ignore="MissingConstraints" />
-
-    <TextView
         android:id="@+id/last_name_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="28dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="28dp"
         android:text="Last Name:"
         android:textColor="#000000"
         android:textSize="27sp"
@@ -162,12 +130,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="28dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="28dp"
         android:text="First Name:"
         android:textColor="#000000"
         android:textSize="27sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/username_tv"
+        app:layout_constraintTop_toBottomOf="@+id/mail_tv"
         tools:ignore="MissingConstraints" />
 
     <Button

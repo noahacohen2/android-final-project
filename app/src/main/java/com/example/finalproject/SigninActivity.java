@@ -31,17 +31,16 @@ public class SigninActivity extends AppCompatActivity {
 
     private void onSignin() {
         binding.signinBtn.setOnClickListener(View -> {
-            String password, mail, firstName, lastName, username, bio, avatar;
-            username = String.valueOf(binding.usernameTp.getText());
+            String password, mail, firstName, lastName, bio, avatar;
             password = String.valueOf(binding.passwordTp.getText());
             firstName = String.valueOf(binding.firstNameTp.getText());
             lastName = String.valueOf(binding.lastNameTp.getText());
             mail = String.valueOf(binding.mailTp.getText());
             bio = String.valueOf(binding.bioTp.getText());
             avatar = ""; //TODO
-            if(!isFieldsEmpty(password, mail, firstName, lastName,username, bio)){
+            if(!isFieldsEmpty(password, mail, firstName, lastName, bio)){
                 User userToAdd = new User(password, mail, firstName,
-                        lastName, username, bio, UserModel.instance.userId, avatar);
+                        lastName, bio, UserModel.instance.userId, avatar);
 
                saveUser(userToAdd);
             }
@@ -50,12 +49,8 @@ public class SigninActivity extends AppCompatActivity {
 
     private boolean isFieldsEmpty(String password,  String mail,
                                   String firstName, String lastName,
-                                  String username, String bio){
+                                  String bio){
 
-        if(TextUtils.isEmpty(username)){
-            Toast.makeText(SigninActivity.this, "enter username", Toast.LENGTH_SHORT).show();
-            return  true;
-        }
         if(TextUtils.isEmpty(password)){
             Toast.makeText(SigninActivity.this, "enter password", Toast.LENGTH_SHORT).show();
             return  true;

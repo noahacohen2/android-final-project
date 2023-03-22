@@ -7,19 +7,6 @@
     tools:context=".SigninActivity">
 
         <TextView
-            android:id="@+id/username_tv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="20dp"
-            android:text="Username:"
-            android:textColor="#000000"
-            android:textSize="27sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/last_name_tv"
-            tools:ignore="MissingConstraints" />
-
-        <TextView
             android:id="@+id/mail_tv2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -55,7 +42,7 @@
             android:id="@+id/bio_tp"
             android:layout_width="229dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="16dp"
             android:background="@drawable/edit_text_rect"
             android:ems="10"
             android:inputType="textPersonName"
@@ -65,23 +52,6 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.9"
             app:layout_constraintStart_toEndOf="@+id/bio_tv"
-            app:layout_constraintTop_toBottomOf="@+id/username_tp"
-            tools:ignore="MissingConstraints" />
-
-        <EditText
-            android:id="@+id/username_tp"
-            android:layout_width="229dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:background="@drawable/edit_text_rect"
-            android:ems="10"
-            android:inputType="textPersonName"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp"
-            android:textSize="27sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.694"
-            app:layout_constraintStart_toEndOf="@+id/username_tv"
             app:layout_constraintTop_toBottomOf="@+id/last_name_tp"
             tools:ignore="MissingConstraints" />
 
@@ -106,12 +76,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="16dp"
             android:text="Bio:"
             android:textColor="#000000"
             android:textSize="27sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/username_tv"
+            app:layout_constraintTop_toBottomOf="@+id/last_name_tv"
             tools:ignore="MissingConstraints" />
 
         <TextView

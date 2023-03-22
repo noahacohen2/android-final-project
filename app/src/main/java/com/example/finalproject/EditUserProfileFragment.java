@@ -49,7 +49,6 @@ public class EditUserProfileFragment extends Fragment {
 
         binding = FragmentEditUserProfileBinding.inflate(inflater, container, false);
         View view = binding.getRoot();
-        binding.usernameTp.setText(this.user.getUsername());
         binding.firstNameTp.setText(this.user.getFirstName());
         binding.lastNameTp.setText(this.user.getLastName());
         binding.mailTp.setText(this.user.getMail());
@@ -67,7 +66,7 @@ public class EditUserProfileFragment extends Fragment {
 
         // todo: delete temp user
         User user = new User( "123456","lal@gmail.com", "daniel",
-                "sabag", "daniel123" , "i am lala", "xUddApYCDjdysmQZrEeQu9jgNwR2","https://firebasestorage.googleapis.com/v0/b/olaf-android.appspot.com/o/images%2F14bc3e06-c07d-47ee-96fa-0b675921efdb.jpg?alt=media&token=c1c76581-9bbf-4e28-a217-92c6241e3671");
+                "sabag",   "i am lala", "xUddApYCDjdysmQZrEeQu9jgNwR2","https://firebasestorage.googleapis.com/v0/b/olaf-android.appspot.com/o/images%2F14bc3e06-c07d-47ee-96fa-0b675921efdb.jpg?alt=media&token=c1c76581-9bbf-4e28-a217-92c6241e3671");
         if(user.getImgUrl() != null) {
             Picasso.get().load(user.getImgUrl()).placeholder(R.drawable.bear).into(binding.userImg);
         } else {
@@ -106,7 +105,6 @@ public class EditUserProfileFragment extends Fragment {
                     binding.mailTp.getText().toString(),
                     binding.firstNameTp.getText().toString(),
                     binding.lastNameTp.getText().toString(),
-                    binding.usernameTp.getText().toString(),
                     binding.bioTp.getText().toString(),
                     "", user.getImgUrl());
             editedUser.setUid("xUddApYCDjdysmQZrEeQu9jgNwR2");

@@ -14,7 +14,6 @@ public class User implements Parcelable {
 
     static final String LOCAL_LAST_UPDATED = "user_review_local_last_update";
 
-    public String username;
     public String password;
     public String firstName;
     public String lastName;
@@ -29,30 +28,23 @@ public class User implements Parcelable {
     }
 
     public User(String password, String mail, String firstName,
-                String lastName, String username, String bio) {
+                String lastName, String bio) {
         this(mail, password);
-        setExtraData(firstName, lastName, username, bio);
+        setExtraData(firstName, lastName, bio);
     }
 
-//    public User(String password, String mail, String firstName,
-//                String lastName, String username, String bio, String uid) {
-//        this(password, mail, firstName, lastName, username, bio);
-//        this.uid = uid;
-//    }
-
     public User(String password, String mail, String firstName,
-                String lastName, String username, String bio, String uid, String imgUrl) {
-        this(password, mail, firstName, lastName, username, bio);
+                String lastName, String bio, String uid, String imgUrl) {
+        this(password, mail, firstName, lastName, bio);
         this.uid = uid;
         this.imgUrl = imgUrl;
     }
 
 
     public void setExtraData(String firstName,
-                             String lastName, String username, String bio) {
+                             String lastName, String bio) {
         this.firstName = firstName;
         this.lastName = lastName;
-        this.username = username;
         this.bio = bio;
     }
 
@@ -61,12 +53,11 @@ public class User implements Parcelable {
         String mail = (String)json.get("Mail");
         String firstname = (String)json.get("Firstname");
         String lastname = (String)json.get("Lastname");
-        String username = (String)json.get("Username");
         String bio = (String)json.get("Bio");
         String uid = (String)json.get("Uid");
         String imgUrl = (String)json.get("ImgUrl");
 
-        return new User(password, mail, firstname, lastname, username, bio, uid, imgUrl);
+        return new User(password, mail, firstname, lastname, bio, uid, imgUrl);
     }
 
     public Map<String, Object> toJson() {
@@ -75,16 +66,11 @@ public class User implements Parcelable {
         json.put("Mail", this.getMail());
         json.put("Firstname", this.getFirstName());
         json.put("Lastname", this.getLastName());
-        json.put("Username", this.getUsername());
         json.put("Bio", this.getBio());
         json.put("Uid", this.getUid());
         json.put("ImgUrl", this.getImgUrl());
 
         return json;
-    }
-
-    public String getUsername(){
-        return  this.username;
     }
 
     public String getPassword(){
@@ -143,7 +129,6 @@ public class User implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel parcel, int i) {
-        parcel.writeString(username);
         parcel.writeString(password);
         parcel.writeString(firstName);
         parcel.writeString(lastName);
@@ -155,7 +140,7 @@ public class User implements Parcelable {
     }
 
     protected User(Parcel in) {
-        this(in.readString(), in.readString(),in.readString(),in.readString(),in.readString(),in.readString(),in.readString(),in.readString());
+        this( in.readString(),in.readString(),in.readString(),in.readString(),in.readString(),in.readString(),in.readString());
     }
 
     public static final Creator<User> CREATOR = new Creator<User>() {
