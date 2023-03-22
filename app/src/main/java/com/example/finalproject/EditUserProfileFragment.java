@@ -29,12 +29,10 @@ public class EditUserProfileFragment extends Fragment {
     User user;
 
     public EditUserProfileFragment() {
-        // Required empty public constructor
-        this.user = new User( "123456","lal@gmail.com", "daniel",
-                "sabag", "daniel123" , "i am lala");
+        // Required empty public constructor;
     }
 
-    public EditUserProfileFragment(User user) {
+    private void setParameters(User user) {
         this.user = user;
     }
 
@@ -46,6 +44,8 @@ public class EditUserProfileFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        setParameters(EditUserProfileFragmentArgs.fromBundle(getArguments()).getUser());
+
 
         binding = FragmentEditUserProfileBinding.inflate(inflater, container, false);
         View view = binding.getRoot();
@@ -101,14 +101,16 @@ public class EditUserProfileFragment extends Fragment {
 
     public void onSave(View view){
         binding.saveEditBtn.setOnClickListener(View -> {
+            //TODO: insert img
             User editedUser = new User(this.user.getPassword(),
                     binding.mailTp.getText().toString(),
                     binding.firstNameTp.getText().toString(),
                     binding.lastNameTp.getText().toString(),
                     binding.usernameTp.getText().toString(),
-                    binding.bioTp.getText().toString());
+                    binding.bioTp.getText().toString(),
+                    "", user.getImgUrl());
             editedUser.setUid("xUddApYCDjdysmQZrEeQu9jgNwR2");
-            editedUser.setImgUrl(user.getImgUrl());
+//            editedUser.setImgUrl(user.getImgUrl());
 
             if(isImgSelected) {
                 uploadImg(editedUser, (url) -> {

@@ -10,6 +10,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavDirections;
 import androidx.navigation.Navigation;
 import android.os.Parcel;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,10 +25,10 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 
 public class UserProfileFragment extends Fragment {
-    ArrayList<Review> reviewsList = new ArrayList<>();
     FragmentUserProfileBinding binding;
     FirebaseAuth mAuth;
     UserProfileFragmentViewModel viewModel;
+    User currUserData;
 
     public UserProfileFragment() {
         // Required empty public constructor
@@ -57,7 +58,7 @@ public class UserProfileFragment extends Fragment {
             @Override
             public void onItemClick(int pos) {
                 Bundle bundle = new Bundle();
-                Review rv = viewModel.getData().getValue().get(pos);
+                Review rv = viewModel.getReviewListData().getValue().get(pos);
                 bundle.putParcelable("Review", rv);
                 Navigation.findNavController(view).navigate(R.id.action_userProfileFragment_to_newReviewFragment, bundle);
             }
@@ -73,13 +74,31 @@ public class UserProfileFragment extends Fragment {
             }
         };
 
-        viewModel.getData().observe(getViewLifecycleOwner(),list->{
+        viewModel.getReviewListData().observe(getViewLifecycleOwner(),list->{
             reviewListFragment.setParameters(list, reviewRowOnClickListener);
         });
 
+        Model.instance().getUserData(user -> {
+            binding.usernameTv.setText(user.getFirstName() + " " + user.getLastName());
+            binding.mailTv.setText(user.getMail());
+            binding.bioTv.setText(user.getBio());
+            currUserData = user;
 
-        NavDirections action = UserProfileFragmentDirections.actionUserProfileFragmentToEditUserProfileFragment();
-        binding.editBtn.setOnClickListener(Navigation.createNavigateOnClickListener(action));
+            if(user.getImgUrl() != null) {
+
+                Picasso.get().load(user.getImgUrl()).placeholder(R.drawable.bear).into(binding.avatarImg);
+            } else {
+                binding.avatarImg.setImageResource(R.drawable.bear);
+            }
+        });
+
+
+        binding.editBtn.setOnClickListener(view1 -> {
+            Bundle userBundle = new Bundle();
+            userBundle.putParcelable("User", currUserData);
+            Navigation.findNavController(view1).navigate(R.id.action_userProfileFragment_to_editUserProfileFragment, userBundle);
+        });
+
         binding.logoutBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -87,19 +106,18 @@ public class UserProfileFragment extends Fragment {
                 changeActivity(LoginActivity.class);
             }
         });
-
-        // todo: change temp user
-
-        User user = new User( "123456","lal@gmail.com", "daniel",
-                "sabag", "daniel123" , "i am lala", "xUddApYCDjdysmQZrEeQu9jgNwR2","https://firebasestorage.googleapis.com/v0/b/olaf-android.appspot.com/o/images%2F14bc3e06-c07d-47ee-96fa-0b675921efdb.jpg?alt=media&token=c1c76581-9bbf-4e28-a217-92c6241e3671");
-        if(user.getImgUrl() != null) {
-            Picasso.get().load(user.getImgUrl()).placeholder(R.drawable.bear).into(binding.avatarImg);
-        } else {
-            binding.avatarImg.setImageResource(R.drawable.bear);
-        }
+//
+//        // todo: change temp user
+//
+//        User user = new User( "123456","lal@gmail.com", "daniel",
+//                "sabag", "daniel123" , "i am lala", "xUddApYCDjdysmQZrEeQu9jgNwR2","https://firebasestorage.googleapis.com/v0/b/olaf-android.appspot.com/o/images%2F14bc3e06-c07d-47ee-96fa-0b675921efdb.jpg?alt=media&token=c1c76581-9bbf-4e28-a217-92c6241e3671");
+//        if(user.getImgUrl() != null) {
+//            Picasso.get().load(user.getImgUrl()).placeholder(R.drawable.bear).into(binding.avatarImg);
+//        } else {
+//            binding.avatarImg.setImageResource(R.drawable.bear);
+//        }
         LiveDataEvents.instance().EventReviewListReload.observe(getViewLifecycleOwner(),unused->{
-            //TODO: cange user
-            Model.instance().refreshAllUserReviews("1");
+            Model.instance().refreshAllUserReviews();
         });
 
         return view;

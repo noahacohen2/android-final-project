@@ -32,17 +32,17 @@ public class SigninActivity extends AppCompatActivity {
 
     private void onSignin() {
         binding.signinBtn.setOnClickListener(View -> {
-            String password, mail, firstName, lastName, username, bio;
+            String password, mail, firstName, lastName, username, bio, avatar;
             username = String.valueOf(binding.usernameTp.getText());
             password = String.valueOf(binding.passwordTp.getText());
             firstName = String.valueOf(binding.firstNameTp.getText());
             lastName = String.valueOf(binding.lastNameTp.getText());
             mail = String.valueOf(binding.mailTp.getText());
             bio = String.valueOf(binding.bioTp.getText());
-
+            avatar = ""; //TODO
             if(!isFieldsEmpty(password, mail, firstName, lastName,username, bio)){
                 User userToAdd = new User(password, mail, firstName,
-                        lastName, username, bio);
+                        lastName, username, bio, Model.instance().userId, avatar);
 
                saveUser(userToAdd);
             }
@@ -95,6 +95,7 @@ public class SigninActivity extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
                             userToAdd.setUid(uid);
+                            Model.instance().userId = uid;
                             Model.instance().createUser(userToAdd, () -> changeActivity(MainActivity.class));
 
                         } else {

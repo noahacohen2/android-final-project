@@ -34,9 +34,6 @@ public class FbReviewModel {
     }
 
     public void getUserReviewsSince(Long since, String user, Model.GetUserReviewsListener callback) {
-        Log.d("noa-timestemp",new Timestamp(since,0).toDate().toString());
-        Log.d("noa-user",user);
-
         db.collection("reviews").whereEqualTo("UserId", user).whereGreaterThanOrEqualTo("lastUpdated", new Timestamp(since,0)).get().addOnCompleteListener((task) -> {
             ArrayList<Review> list = new ArrayList<>();
             if(task.isSuccessful()) {
