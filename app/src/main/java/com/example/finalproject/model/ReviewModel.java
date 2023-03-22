@@ -1,7 +1,6 @@
 package com.example.finalproject.model;
 
 import androidx.lifecycle.LiveData;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Executor;
@@ -69,18 +68,4 @@ public class ReviewModel {
     public void updateReview(Review review, UpdateReviewListener callback) {
         fbReviewModel.updateReview(review, callback);
     }
-
-    // Musicals
-    public interface GetAllMusicalsListener {
-        void onComplete(ArrayList<Musical> data);
-    }
-
-//    // todo: set to void and get real data and add calback param
-//    public List<Musical> getAllMusicals() {
-//        List<Musical> temp = new ArrayList<>();
-//        temp.add(new Musical("Frozen", "lalalallala", "2 hours", "lalalalalalalalalalalalalalalalala", "from 20$", "NY"));
-//        temp.add(new Musical("Lion King", "lbllbblblblbl", "2 hours", "lalalalalalalalalalalalalalalalala", "from 20$", "NY"));
-//
-//        return temp;
-//    }
 }
