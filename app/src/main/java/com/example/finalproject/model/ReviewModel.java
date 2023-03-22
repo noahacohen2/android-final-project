@@ -13,16 +13,8 @@ public class ReviewModel {
     private FbReviewModel fbReviewModel = new FbReviewModel();
     AppLocalDbRepository localDb = AppLocalDb.getAppDb();
 
-    public interface GetAllReviewsListener {
-        void onComplete(ArrayList<Review> data);
-    }
-
     public void getAllMusicalReviews(Integer eventId, Model.Listener<ArrayList<Review>> callback) {
         fbReviewModel.getAllMusicalReviews(eventId,callback);
-    }
-
-    public interface GetUserReviewsListener {
-        void onComplete(ArrayList<Review> data);
     }
 
     private LiveData<List<Review>> userReviewList;
@@ -52,9 +44,6 @@ public class ReviewModel {
 
     }
 
-    public interface AddReviewListener {
-        void onComplete();
-    }
     public void addReview(Review review, Model.Listener<Void> callback) {
         fbReviewModel.addReview(review, (unused) -> {
             refreshAllUserReviews();
@@ -62,9 +51,6 @@ public class ReviewModel {
         });
     }
 
-    public interface UpdateReviewListener {
-        void onComplete();
-    }
     public void updateReview(Review review, Model.Listener<Void> callback) {
         fbReviewModel.updateReview(review, callback);
     }
