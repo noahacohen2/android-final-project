@@ -2,17 +2,12 @@ package com.example.finalproject.model;
 import androidx.annotation.NonNull;
 import android.os.Parcel;
 import android.os.Parcelable;
-import android.util.Log;
-
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
-
 import com.google.firebase.Timestamp;
 import com.google.firebase.firestore.FieldValue;
-
 import java.util.HashMap;
 import java.util.Map;
-
 import javax.annotation.Nonnull;
 
 @Entity
@@ -20,7 +15,6 @@ public class Review implements Parcelable {
     @PrimaryKey
     @NonNull
     public String docId;
-
     public String seat;
     public Float stars;
     public String content;
@@ -29,9 +23,8 @@ public class Review implements Parcelable {
     public String imgUrl;
     public Long lastUpdated;
 
-    public Review() {
+    public Review() {}
 
-    }
     public Review(String seat, Float stars, String content, String userId,String docId,String eventId) {
         this.seat = seat;
         this.stars = stars;
@@ -45,7 +38,6 @@ public class Review implements Parcelable {
         this(seat,stars,content,userId,docId,eventId);
         setImgUrl(ImageUrl);
     }
-
 
     public Review(Parcel parcel) {
         // seat, stars,content,userId,eventId,docId,imgUrl
@@ -91,16 +83,6 @@ public class Review implements Parcelable {
         return 0;
     }
 
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(docId);
-        dest.writeString(seat);
-        dest.writeFloat(stars);
-        dest.writeString(content);
-        dest.writeString(userId);
-        dest.writeString(imgUrl);
-    }
-
     public static final Parcelable.Creator<Review> CREATOR = new Parcelable.Creator<Review>() {
         public Review createFromParcel(Parcel in) {
             return new Review(in);
@@ -111,7 +93,7 @@ public class Review implements Parcelable {
         }
     };
 
-    //Getters
+    // Getters
     public String getDocId() {
         return docId;
     }
@@ -157,6 +139,17 @@ public class Review implements Parcelable {
         this.content = content;
     }
 
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(docId);
+        dest.writeString(seat);
+        dest.writeFloat(stars);
+        dest.writeString(content);
+        dest.writeString(userId);
+        dest.writeString(imgUrl);
+        // todo: add eventId here
+    }
+
     public void setUserId(String userId) {
         this.userId = userId;
     }
@@ -172,9 +165,4 @@ public class Review implements Parcelable {
     public void setImgUrl(String imgUrl) {
         this.imgUrl = imgUrl;
     }
-
-
-
-
-
 }

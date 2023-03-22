@@ -9,6 +9,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class User {
+
+    static final String LOCAL_LAST_UPDATED = "user_review_local_last_update";
+
     public String username;
     public String password;
     public String firstName;
@@ -16,6 +19,7 @@ public class User {
     public String mail;
     public String bio;
     public String uid;
+    public String imgUrl;
 
     public User(String mail, String password) {
         this.mail = mail;
@@ -34,7 +38,13 @@ public class User {
         this.uid = uid;
     }
 
-    static final String LOCAL_LAST_UPDATED = "user_review_local_last_update";
+    public User(String password, String mail, String firstName,
+                String lastName, String username, String bio, String uid, String imgUrl) {
+        this(password, mail, firstName, lastName, username, bio);
+        this.uid = uid;
+        this.imgUrl = imgUrl;
+    }
+
 
     public void setExtraData(String firstName,
                         String lastName, String username, String bio) {
@@ -52,8 +62,9 @@ public class User {
         String username = (String)json.get("Username");
         String bio = (String)json.get("Bio");
         String uid = (String)json.get("Uid");
+        String imgUrl = (String)json.get("ImgUrl");
 
-        return new User(password, mail, firstname, lastname, username, bio, uid);
+        return new User(password, mail, firstname, lastname, username, bio, uid, imgUrl);
     }
 
     public Map<String, Object> toJson() {
@@ -65,6 +76,8 @@ public class User {
         json.put("Username", this.getUsername());
         json.put("Bio", this.getBio());
         json.put("Uid", this.getUid());
+        json.put("ImgUrl", this.getImgUrl());
+
         return json;
     }
 
@@ -94,6 +107,14 @@ public class User {
 
     public String getUid() {
         return uid;
+    }
+
+    public String getImgUrl() {
+        return imgUrl;
+    }
+
+    public void setImgUrl(String imgUrl) {
+        this.imgUrl = imgUrl;
     }
 
     public void setUid(String uid) {
