@@ -95,7 +95,7 @@ public class NewReviewFragment extends Fragment {
             if(currentReview == null) {
                 UUID uuid = UUID.randomUUID();
                 String uniqueID = uuid.toString();
-                Review rv = new Review(seat,rate,content, "2", uniqueID, eventId);
+                Review rv = new Review(seat,rate,content, "1", uniqueID, eventId);
                 if (isImgSelected) {
                     uploadImg(rv, (url) -> {
                         if (url != null) {

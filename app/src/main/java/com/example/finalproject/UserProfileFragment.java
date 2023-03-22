@@ -1,16 +1,20 @@
 package com.example.finalproject;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavDirections;
 import androidx.navigation.Navigation;
 import android.os.Parcel;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import com.example.finalproject.databinding.FragmentUserProfileBinding;
-import com.example.finalproject.model.Model;
 import com.example.finalproject.model.Review;
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -20,6 +24,7 @@ public class UserProfileFragment extends Fragment {
     ArrayList<Review> reviewsList = new ArrayList<>();
     FragmentUserProfileBinding binding;
     FirebaseAuth mAuth;
+    UserProfileFragmentViewModel viewModel;
 
     public UserProfileFragment() {
         // Required empty public constructor
@@ -49,7 +54,7 @@ public class UserProfileFragment extends Fragment {
             @Override
             public void onItemClick(int pos) {
                 Bundle bundle = new Bundle();
-                Review rv = reviewsList.get(pos);
+                Review rv = viewModel.getData().getValue().get(pos);
                 bundle.putParcelable("Review", rv);
                 Navigation.findNavController(view).navigate(R.id.action_userProfileFragment_to_newReviewFragment, bundle);
             }
@@ -65,15 +70,13 @@ public class UserProfileFragment extends Fragment {
             }
         };
 
-        Model.instance().getUserReviews("1",(data)-> {
-            reviewsList = data;
-            if (reviewListFragment != null) {
-                reviewListFragment.setParameters(reviewsList, reviewRowOnClickListener);
-            }
+        viewModel.getData().observe(getViewLifecycleOwner(),list->{
+            reviewListFragment.setParameters(list, reviewRowOnClickListener);
         });
 
+
         if (reviewListFragment != null) {
-            reviewListFragment.setParameters(reviewsList, reviewRowOnClickListener);
+            reviewListFragment.setParameters(viewModel.getData().getValue(), reviewRowOnClickListener);
         }
 
         NavDirections action = UserProfileFragmentDirections.actionUserProfileFragmentToEditUserProfileFragment();
@@ -92,5 +95,11 @@ public class UserProfileFragment extends Fragment {
     private void changeActivity(Class activityClass) {
         Intent intent = new Intent(getActivity(), activityClass);
         startActivity(intent);
+    }
+
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+        viewModel = new ViewModelProvider(this).get(UserProfileFragmentViewModel.class);
     }
 }
