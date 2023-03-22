@@ -5,18 +5,6 @@ public class UserModel {
     private FbUserModel fbUserModel = new FbUserModel();
     final public static UserModel instance = new UserModel();
 
-    public interface GetUserDataListener {
-        void onComplete(User user);
-    }
-
-    public interface AddUserListener {
-        void onComplete();
-    }
-
-    public interface UpdateUserListener {
-        void onComplete();
-    }
-
     public void setUserId(String userId) {
         this.userId = userId;
     }
