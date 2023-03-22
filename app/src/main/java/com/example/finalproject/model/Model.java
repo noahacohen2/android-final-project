@@ -53,14 +53,14 @@ public class Model {
         void onComplete(ArrayList<Musical> data);
     }
 
-    // todo: set to void and get real data and add calback param
-    public List<Musical> getAllMusicals() {
-        List<Musical> temp = new ArrayList<>();
-        temp.add(new Musical("Frozen", "lalalallala"));
-        temp.add(new Musical("Lion King", "lbllbblblblbl"));
-
-        return temp;
-    }
+//    // todo: set to void and get real data and add calback param
+//    public List<Musical> getAllMusicals() {
+//        List<Musical> temp = new ArrayList<>();
+//        temp.add(new Musical("Frozen", "lalalallala", "2 hours", "lalalalalalalalalalalalalalalalala", "from 20$", "NY"));
+//        temp.add(new Musical("Lion King", "lbllbblblblbl", "2 hours", "lalalalalalalalalalalalalalalalala", "from 20$", "NY"));
+//
+//        return temp;
+//    }
 
     // User
     public interface AddUserListener {

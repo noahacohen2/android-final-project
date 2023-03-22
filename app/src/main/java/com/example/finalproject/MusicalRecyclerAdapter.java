@@ -39,9 +39,9 @@ class MusicalViewHolder extends RecyclerView.ViewHolder{
         titleTv.setText(musical.getTitle());
         descriptionTv.setText(musical.getDescription());
         if(musical.getImg() != null) {
-            Picasso.get().load(musical.getImg()).placeholder(R.drawable.bear).into(imgIv);
+            Picasso.get().load(musical.getImg()).placeholder(R.drawable.default_pic).into(imgIv);
         } else {
-            imgIv.setImageResource(R.drawable.bear);
+            imgIv.setImageResource(R.drawable.default_pic);
         }
     }
 }
