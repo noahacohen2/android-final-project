@@ -3,18 +3,15 @@ package com.example.finalproject;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
-
 import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavDirections;
 import androidx.navigation.Navigation;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
 import com.example.finalproject.model.ImageModel;
 import com.example.finalproject.model.User;
 import com.example.finalproject.databinding.FragmentEditUserProfileBinding;
@@ -28,9 +25,7 @@ public class EditUserProfileFragment extends Fragment {
     Boolean isImgSelected = false;
     User user;
 
-    public EditUserProfileFragment() {
-        // Required empty public constructor;
-    }
+    public EditUserProfileFragment() {}
 
     private void setParameters(User user) {
         this.user = user;
@@ -45,7 +40,6 @@ public class EditUserProfileFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         setParameters(EditUserProfileFragmentArgs.fromBundle(getArguments()).getUser());
-
 
         binding = FragmentEditUserProfileBinding.inflate(inflater, container, false);
         View view = binding.getRoot();
