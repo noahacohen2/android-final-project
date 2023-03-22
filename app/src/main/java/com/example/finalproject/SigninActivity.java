@@ -37,7 +37,7 @@ public class SigninActivity extends AppCompatActivity {
             lastName = String.valueOf(binding.lastNameTp.getText());
             mail = String.valueOf(binding.mailTp.getText());
             bio = String.valueOf(binding.bioTp.getText());
-            avatar = ""; //TODO
+            avatar = "";
             if(!isFieldsEmpty(password, mail, firstName, lastName, bio)){
                 User userToAdd = new User(password, mail, firstName,
                         lastName, bio, UserModel.instance.userId, avatar);
