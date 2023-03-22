@@ -95,7 +95,7 @@ public class NewReviewFragment extends Fragment {
             if(currentReview == null) {
                 UUID uuid = UUID.randomUUID();
                 String uniqueID = uuid.toString();
-                Review rv = new Review(seat,rate,content, "1", uniqueID, eventId);
+                Review rv = new Review(seat,rate,content, Model.instance().userId, uniqueID, eventId);
                 if (isImgSelected) {
                     uploadImg(rv, (url) -> {
                         if (url != null) {
@@ -111,7 +111,7 @@ public class NewReviewFragment extends Fragment {
                     });
                 }
             } else {
-                Review rv = new Review(seat,rate,content, "1", currentReview.getDocId(),eventId, currentReview.getImgUrl());
+                Review rv = new Review(seat,rate,content, Model.instance().userId, currentReview.getDocId(),eventId, currentReview.getImgUrl());
                 if (isImgSelected) {
                     uploadImg(rv, (url) -> {
                         if (url != null) {

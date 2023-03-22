@@ -11,11 +11,12 @@ import java.util.concurrent.Executors;
 public class Model {
     private Executor executor = Executors.newSingleThreadExecutor();
     private static final Model _instance = new Model();
+    AppLocalDbRepository localDb = AppLocalDb.getAppDb();
+    public String userId;
+
     private FbReviewModel fbReviewModel = new FbReviewModel();
     private FbUserModel fbUserModel = new FbUserModel();
     private  FbImgModel fbImgModel = new FbImgModel();
-    AppLocalDbRepository localDb = AppLocalDb.getAppDb();
-
 
     public static Model instance() {
         return _instance;
@@ -38,21 +39,19 @@ public class Model {
     }
 
     private LiveData<List<Review>> userReviewList;
-    public LiveData<List<Review>> getUserReviews(String userId) {
+    public LiveData<List<Review>> getUserReviews() {
         if(userReviewList == null){
             userReviewList = localDb.reviewDao().getUserReviews(userId);
-            refreshAllUserReviews(userId);
+            refreshAllUserReviews();
         }
         return userReviewList;
     }
-    public void refreshAllUserReviews(String user) {
+    public void refreshAllUserReviews() {
         Long localLastUSerReviewUpdate = User.getLocalLastReviewUpdate();
-        Log.d("noa-time", localLastUSerReviewUpdate.toString());
-        fbReviewModel.getUserReviewsSince(localLastUSerReviewUpdate,user,list -> {
+        fbReviewModel.getUserReviewsSince(localLastUSerReviewUpdate,userId,list -> {
             executor.execute(()-> {
                 Long time = localLastUSerReviewUpdate;
                 for (Review rv : list) {
-                    Log.d("noa", rv.getDocId());
                     localDb.reviewDao().insertAll(rv);
 
                     if (time < rv.getLastUpdated()) {
@@ -71,8 +70,7 @@ public class Model {
     }
     public void addReview(Review review, AddReviewListener callback) {
         fbReviewModel.addReview(review, () -> {
-            //TODO;
-            refreshAllUserReviews("1");
+            refreshAllUserReviews();
             callback.onComplete();
         });
     }
@@ -99,12 +97,20 @@ public class Model {
 //    }
 
     // User
+    public interface GetUserDataListener {
+        void  onComplete(User user);
+    }
+
     public interface AddUserListener {
         void onComplete();
     }
 
     public interface UpdateUserListener {
         void onComplete();
+    }
+
+    public void getUserData(GetUserDataListener callback) {
+        fbUserModel.getUserData(userId, callback);
     }
 
     public void createUser(User user, AddUserListener callback) {
@@ -122,4 +128,5 @@ public class Model {
     public void uploadImage(String name, Bitmap bitmap, UploadImageListener callback) {
         fbImgModel.uploadImage(name, bitmap, callback);
     }
+    //End Images
 }

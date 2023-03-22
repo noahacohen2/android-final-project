@@ -2,13 +2,15 @@ package com.example.finalproject.model;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.os.Parcel;
+import android.os.Parcelable;
 
 import com.example.finalproject.FinalProjectApplication;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class User {
+public class User implements Parcelable {
 
     static final String LOCAL_LAST_UPDATED = "user_review_local_last_update";
 
@@ -47,7 +49,7 @@ public class User {
 
 
     public void setExtraData(String firstName,
-                        String lastName, String username, String bio) {
+                             String lastName, String username, String bio) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.username = username;
@@ -132,4 +134,37 @@ public class User {
         editor.putLong(LOCAL_LAST_UPDATED,time);
         editor.commit();
     }
+
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeString(username);
+        parcel.writeString(password);
+        parcel.writeString(firstName);
+        parcel.writeString(lastName);
+        parcel.writeString(mail);
+        parcel.writeString(bio);
+        parcel.writeString(uid);
+        parcel.writeString(imgUrl);
+
+    }
+
+    protected User(Parcel in) {
+        this(in.readString(), in.readString(),in.readString(),in.readString(),in.readString(),in.readString(),in.readString());
+    }
+
+    public static final Creator<User> CREATOR = new Creator<User>() {
+        public User createFromParcel(Parcel in) {
+            return new User(in);
+        }
+
+        public User[] newArray(int size) {
+            return new User[size];
+        }
+    };
 }

@@ -38,6 +38,10 @@
         android:name="com.example.finalproject.EditUserProfileFragment"
         android:label="fragment_edit_user_profile"
         tools:layout="@layout/fragment_edit_user_profile" >
+        <argument
+            android:name="User"
+            app:argType="com.example.finalproject.model.User"
+            app:nullable="true"/>
         <action
             android:id="@+id/action_editUserProfileFragment_to_userProfileFragment"
             app:destination="@id/userProfileFragment" />

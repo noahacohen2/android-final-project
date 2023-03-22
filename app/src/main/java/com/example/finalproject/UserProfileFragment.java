@@ -24,10 +24,10 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 
 public class UserProfileFragment extends Fragment {
-    ArrayList<Review> reviewsList = new ArrayList<>();
     FragmentUserProfileBinding binding;
     FirebaseAuth mAuth;
     UserProfileFragmentViewModel viewModel;
+    User currUserData;
 
     public UserProfileFragment() {
         // Required empty public constructor
@@ -57,7 +57,7 @@ public class UserProfileFragment extends Fragment {
             @Override
             public void onItemClick(int pos) {
                 Bundle bundle = new Bundle();
-                Review rv = viewModel.getData().getValue().get(pos);
+                Review rv = viewModel.getReviewListData().getValue().get(pos);
                 bundle.putParcelable("Review", rv);
                 Navigation.findNavController(view).navigate(R.id.action_userProfileFragment_to_newReviewFragment, bundle);
             }
@@ -73,13 +73,30 @@ public class UserProfileFragment extends Fragment {
             }
         };
 
-        viewModel.getData().observe(getViewLifecycleOwner(),list->{
+        viewModel.getReviewListData().observe(getViewLifecycleOwner(),list->{
             reviewListFragment.setParameters(list, reviewRowOnClickListener);
         });
 
+        Model.instance().getUserData(user -> {
+            binding.usernameTv.setText(user.getFirstName() + " " + user.getLastName());
+            binding.mailTv.setText(user.getMail());
+            binding.bioTv.setText(user.getBio());
+            currUserData = user;
 
-        NavDirections action = UserProfileFragmentDirections.actionUserProfileFragmentToEditUserProfileFragment();
-        binding.editBtn.setOnClickListener(Navigation.createNavigateOnClickListener(action));
+            if(currUserData.getImgUrl() != null) {
+                Picasso.get().load(currUserData.getImgUrl()).placeholder(R.drawable.bear).into(binding.avatarImg);
+            } else {
+                binding.avatarImg.setImageResource(R.drawable.bear);
+            }
+        });
+
+
+        binding.editBtn.setOnClickListener(view1 -> {
+            Bundle userBundle = new Bundle();
+            userBundle.putParcelable("User", currUserData);
+            Navigation.findNavController(view1).navigate(R.id.action_userProfileFragment_to_editUserProfileFragment, userBundle);
+        });
+
         binding.logoutBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -98,8 +115,7 @@ public class UserProfileFragment extends Fragment {
             binding.avatarImg.setImageResource(R.drawable.bear);
         }
         LiveDataEvents.instance().EventReviewListReload.observe(getViewLifecycleOwner(),unused->{
-            //TODO: cange user
-            Model.instance().refreshAllUserReviews("1");
+            Model.instance().refreshAllUserReviews();
         });
 
         return view;

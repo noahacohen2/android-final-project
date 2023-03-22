@@ -1,13 +1,12 @@
 package com.example.finalproject.model;
 
 import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreSettings;
 
 public class FbUserModel {
     CollectionReference usersCollection;
-
-
 
     FbUserModel() {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -15,6 +14,18 @@ public class FbUserModel {
                 .setPersistenceEnabled(false).build();
         db.setFirestoreSettings(settings);
         usersCollection  = db.collection("users");
+    }
+
+    public void getUserData(String userId, Model.GetUserDataListener listener) {
+        usersCollection.document(userId).get().addOnCompleteListener(task -> {
+            if(task.isSuccessful()) {
+                DocumentSnapshot document = task.getResult();
+                if (document.exists()) {
+                    User user = User.fromJson(task.getResult().getData());
+                    listener.onComplete(user);
+                }
+            }
+        });
     }
 
     public void createUser(User user, Model.AddUserListener listener) {
