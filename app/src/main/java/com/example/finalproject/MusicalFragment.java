@@ -10,6 +10,7 @@ import com.example.finalproject.model.LiveDataEvents;
 import com.example.finalproject.model.Musical;
 import com.example.finalproject.model.Review;
 import com.example.finalproject.model.ReviewModel;
+import com.squareup.picasso.Picasso;
 
 import android.os.Bundle;
 import android.os.Parcel;
@@ -48,15 +49,12 @@ public class MusicalFragment extends Fragment {
         NavDirections action = MusicalFragmentDirections.actionMusicalFragmentToNewReviewFragment(null);
         binding.addReviewBtn.setOnClickListener(Navigation.createNavigateOnClickListener(action));
 
-
         reviewListFragment = (ReviewsListFragment) getChildFragmentManager().findFragmentById(R.id.musicalFc);
 
         reviewRowOnClickListener = new ReviewRecyclerAdapter.OnItemClickListener() {
 
             @Override
-            public void onItemClick(int pos) {
-
-            }
+            public void onItemClick(int pos) {}
 
             @Override
             public int describeContents() {
@@ -81,7 +79,9 @@ public class MusicalFragment extends Fragment {
 
         setParameters(MusicalFragmentArgs.fromBundle(getArguments()).getMusical());
 
-        Model.instance().getAllReviews((reviewsData) -> {
+        initScreen();
+
+        ReviewModel.instance.getAllReviews((reviewsData) -> {
             reviewsList = reviewsData;
             if (reviewListFragment != null) {
                 reviewListFragment.setParameters(reviewsList, reviewRowOnClickListener);
@@ -98,6 +98,20 @@ public class MusicalFragment extends Fragment {
                 reviewListFragment.setParameters(reviewsList, reviewRowOnClickListener);
             }
         });
+    }
 
+    void initScreen() {
+        binding.nameTv.setText(currMusical.getTitle());
+        binding.taglineTv.setText(currMusical.getDescription());
+        binding.timeTv.setText(currMusical.getTime());
+        binding.descTv.setText(currMusical.getDescription());
+        binding.priceTv.setText(currMusical.getPrice().toString());
+        binding.locationTv.setText("London");
+
+        if(currMusical.getImg() != null) {
+            Picasso.get().load(currMusical.getImg()).placeholder(R.drawable.default_pic).into(binding.musicalIv);
+        } else {
+            binding.musicalIv.setImageResource(R.drawable.default_pic);
+        }
     }
 }
