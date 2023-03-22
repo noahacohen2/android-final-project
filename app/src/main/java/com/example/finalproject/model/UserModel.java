@@ -25,15 +25,15 @@ public class UserModel {
         return this.userId;
     }
 
-    public void getUserData(GetUserDataListener callback) {
+    public void getUserData(Model.Listener<User> callback) {
         fbUserModel.getUserData(userId, callback);
     }
 
-    public void createUser(User user, AddUserListener callback) {
+    public void createUser(User user, Model.Listener<Void> callback) {
         fbUserModel.createUser(user, callback);
     }
 
-    public void updateUser(User user, UpdateUserListener callback) {
+    public void updateUser(User user, Model.Listener<Void>  callback) {
         fbUserModel.updateUser(user, callback);
     }
 }
