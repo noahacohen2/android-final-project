@@ -7,7 +7,7 @@
     tools:context=".MusicalFragment">
 
     <ImageView
-        android:id="@+id/musical_img_iv"
+        android:id="@+id/musicalIv"
         android:layout_width="113dp"
         android:layout_height="153dp"
         android:layout_marginStart="15dp"
@@ -17,29 +17,29 @@
         app:srcCompat="@drawable/frozen" />
 
     <TextView
-        android:id="@+id/musical_title_tv"
+        android:id="@+id/nameTv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="5dp"
         android:layout_marginTop="15dp"
         android:text="Frozen The Musical"
         android:textSize="20sp"
-        app:layout_constraintStart_toEndOf="@+id/musical_img_iv"
+        app:layout_constraintStart_toEndOf="@+id/musicalIv"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/musical_description_tv"
+        android:id="@+id/taglineTv"
         android:layout_width="264dp"
         android:layout_height="119dp"
         android:layout_marginStart="5dp"
         android:layout_marginTop="7dp"
         android:text="Disney’s spectacular staging of the hit movie will thew any frozen heart."
         android:textSize="16sp"
-        app:layout_constraintStart_toEndOf="@+id/musical_img_iv"
-        app:layout_constraintTop_toBottomOf="@+id/musical_title_tv" />
+        app:layout_constraintStart_toEndOf="@+id/musicalIv"
+        app:layout_constraintTop_toBottomOf="@+id/nameTv" />
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/timeTv"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="5dp"
@@ -50,10 +50,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/imageView5"
-        app:layout_constraintTop_toBottomOf="@+id/musical_img_iv" />
+        app:layout_constraintTop_toBottomOf="@+id/musicalIv" />
 
     <TextView
-        android:id="@+id/textView5"
+        android:id="@+id/priceTv"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="5dp"
@@ -64,10 +64,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/imageView6"
-        app:layout_constraintTop_toBottomOf="@+id/textView4" />
+        app:layout_constraintTop_toBottomOf="@+id/descTv" />
 
     <TextView
-        android:id="@+id/textView6"
+        android:id="@+id/locationTv"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="5dp"
@@ -78,10 +78,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/imageView7"
-        app:layout_constraintTop_toBottomOf="@+id/textView5" />
+        app:layout_constraintTop_toBottomOf="@+id/priceTv" />
 
     <TextView
-        android:id="@+id/textView4"
+        android:id="@+id/descTv"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="5dp"
@@ -92,7 +92,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/imageView4"
-        app:layout_constraintTop_toBottomOf="@+id/textView3" />
+        app:layout_constraintTop_toBottomOf="@+id/timeTv" />
 
     <ImageView
         android:id="@+id/imageView4"
@@ -100,7 +100,7 @@
         android:layout_height="21dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="10dp"
-        app:layout_constraintEnd_toStartOf="@+id/textView4"
+        app:layout_constraintEnd_toStartOf="@+id/descTv"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView5"
@@ -112,10 +112,10 @@
         android:layout_height="21dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="12dp"
-        app:layout_constraintEnd_toStartOf="@+id/textView3"
+        app:layout_constraintEnd_toStartOf="@+id/timeTv"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/musical_img_iv"
+        app:layout_constraintTop_toBottomOf="@+id/musicalIv"
         app:srcCompat="@drawable/clock_icon" />
 
     <ImageView
@@ -124,10 +124,10 @@
         android:layout_height="21dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
-        app:layout_constraintEnd_toStartOf="@+id/textView5"
+        app:layout_constraintEnd_toStartOf="@+id/priceTv"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView4"
+        app:layout_constraintTop_toBottomOf="@+id/descTv"
         app:srcCompat="@drawable/tickets_icon" />
 
     <ImageView
@@ -136,7 +136,7 @@
         android:layout_height="21dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="10dp"
-        app:layout_constraintEnd_toStartOf="@+id/textView6"
+        app:layout_constraintEnd_toStartOf="@+id/locationTv"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView6"
@@ -152,7 +152,7 @@
         android:background="?android:attr/listDivider"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView6" />
+        app:layout_constraintTop_toBottomOf="@+id/locationTv" />
 
     <TextView
         android:id="@+id/textView7"
@@ -167,7 +167,7 @@
         app:layout_constraintTop_toBottomOf="@+id/divider" />
 
     <Button
-        android:id="@+id/musical_addReview_btn"
+        android:id="@+id/addReviewBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="2dp"
@@ -180,13 +180,13 @@
         app:layout_constraintTop_toBottomOf="@+id/divider" />
 
     <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/musical_fc"
+        android:id="@+id/musicalFc"
         android:name="com.example.finalproject.ReviewsListFragment"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/musical_addReview_btn" />
+        app:layout_constraintTop_toBottomOf="@+id/addReviewBtn" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

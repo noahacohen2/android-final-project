@@ -59,12 +59,10 @@ public class NewReviewFragment extends Fragment {
     }
 
     private void uploadImg(Review rv, Model.UploadImageListener callback) {
-        if (isImgSelected) {
             binding.addImgBtn.setDrawingCacheEnabled(true);
             binding.addImgBtn.buildDrawingCache();
             Bitmap bitmap = ((BitmapDrawable)  binding.addImgBtn.getDrawable()).getBitmap();
             Model.instance().uploadImage(rv.getDocId(), bitmap, callback);
-        }
     }
 
     @Override
@@ -97,25 +95,37 @@ public class NewReviewFragment extends Fragment {
             if(currentReview == null) {
                 UUID uuid = UUID.randomUUID();
                 String uniqueID = uuid.toString();
-                Review rv = new Review(seat,rate,content, "2", uniqueID, eventId);
-                uploadImg(rv, (url) -> {
-                    if(url != null) {
-                        rv.setImgUrl(url);
-                        Model.instance().addReview(rv, () -> {
-                            Navigation.findNavController(view1).popBackStack();
-                        });
-                    }
-                });
+                Review rv = new Review(seat,rate,content, "1", uniqueID, eventId);
+                if (isImgSelected) {
+                    uploadImg(rv, (url) -> {
+                        if (url != null) {
+                            rv.setImgUrl(url);
+                            Model.instance().addReview(rv, () -> {
+                                Navigation.findNavController(view1).popBackStack();
+                            });
+                        }
+                    });
+                } else {
+                    Model.instance().addReview(rv, () -> {
+                        Navigation.findNavController(view1).popBackStack();
+                    });
+                }
             } else {
-                Review rv = new Review(seat,rate,content, "1", currentReview.getDocId(),eventId);
-                uploadImg(rv,(url) -> {
-                    if(url != null) {
-                        rv.setImgUrl(url);
-                        Model.instance().updateReview(rv, () -> {
-                            Navigation.findNavController(view1).popBackStack();
-                        });
-                    }
-                });
+                Review rv = new Review(seat,rate,content, "1", currentReview.getDocId(),eventId, currentReview.getImgUrl());
+                if (isImgSelected) {
+                    uploadImg(rv, (url) -> {
+                        if (url != null) {
+                            rv.setImgUrl(url);
+                            Model.instance().updateReview(rv, () -> {
+                                Navigation.findNavController(view1).popBackStack();
+                            });
+                        }
+                    });
+                } else {
+                    Model.instance().updateReview(rv, () -> {
+                        Navigation.findNavController(view1).popBackStack();
+                    });
+                }
             }
 
         });

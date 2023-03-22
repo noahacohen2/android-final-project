@@ -1,11 +1,19 @@
 package com.example.finalproject.model;
-
+import androidx.annotation.NonNull;
 import android.os.Parcel;
 import android.os.Parcelable;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+import com.google.firebase.Timestamp;
+import com.google.firebase.firestore.FieldValue;
 import java.util.HashMap;
 import java.util.Map;
+import javax.annotation.Nonnull;
 
+@Entity
 public class Review implements Parcelable {
+    @PrimaryKey
+    @NonNull
     public String docId;
     public String seat;
     public Float stars;
@@ -13,6 +21,9 @@ public class Review implements Parcelable {
     public String userId;
     public String eventId;
     public String imgUrl;
+    public Long lastUpdated;
+
+    public Review() {}
 
     public Review(String seat, Float stars, String content, String userId,String docId,String eventId) {
         this.seat = seat;
@@ -28,7 +39,6 @@ public class Review implements Parcelable {
         setImgUrl(ImageUrl);
     }
 
-
     public Review(Parcel parcel) {
         // seat, stars,content,userId,eventId,docId,imgUrl
         this( parcel.readString(),parcel.readFloat(),parcel.readString(),parcel.readString(), parcel.readString(), parcel.readString(), parcel.readString());
@@ -43,7 +53,17 @@ public class Review implements Parcelable {
         String id = docId;
         String eventId = (String)json.get("EventId");
         String ImageUrl = (String)json.get("ImageUrl");
-        return new Review(seat, rate, text, user, id, eventId, ImageUrl);
+
+        Review rv = new Review(seat, rate, text, user, id, eventId, ImageUrl);
+
+        try{
+            Timestamp time = (Timestamp)json.get("lastUpdated");
+            rv.setLastUpdated(time.getSeconds());
+        } catch (Exception e) {
+
+        }
+
+        return rv;
     }
 
     public Map<String, Object> toJson() {
@@ -54,10 +74,26 @@ public class Review implements Parcelable {
         json.put("UserId", getUserId());
         json.put("EventId", getEventId());
         json.put("ImageUrl", getImgUrl());
-
+        json.put("lastUpdated", FieldValue.serverTimestamp());
         return json;
     }
 
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    public static final Parcelable.Creator<Review> CREATOR = new Parcelable.Creator<Review>() {
+        public Review createFromParcel(Parcel in) {
+            return new Review(in);
+        }
+
+        public Review[] newArray(int size) {
+            return new Review[size];
+        }
+    };
+
+    // Getters
     public String getDocId() {
         return docId;
     }
@@ -80,25 +116,27 @@ public class Review implements Parcelable {
 
     public String getEventId() { return eventId; };
 
-    public String getImgUrl() { return imgUrl; }
-
-    public void setImgUrl(String imgUrl) {
-        this.imgUrl = imgUrl;
+    public Long getLastUpdated() {
+        return lastUpdated;
     }
 
-    public static final Parcelable.Creator<Review> CREATOR = new Parcelable.Creator<Review>() {
-        public Review createFromParcel(Parcel in) {
-            return new Review(in);
-        }
+    // Setters
+    public String getImgUrl() { return imgUrl; }
 
-        public Review[] newArray(int size) {
-            return new Review[size];
-        }
-    };
+    public void setDocId(@Nonnull String docId) {
+        this.docId = docId;
+    }
 
-    @Override
-    public int describeContents() {
-        return 0;
+    public void setSeat(String seat) {
+        this.seat = seat;
+    }
+
+    public void setStars(Float stars) {
+        this.stars = stars;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
     }
 
     @Override
@@ -110,5 +148,21 @@ public class Review implements Parcelable {
         dest.writeString(userId);
         dest.writeString(imgUrl);
         // todo: add eventId here
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+
+    public void setEventId(String eventId) {
+        this.eventId = eventId;
+    }
+
+    public void setLastUpdated(Long time) {
+        this.lastUpdated = time;
+    }
+
+    public void setImgUrl(String imgUrl) {
+        this.imgUrl = imgUrl;
     }
 }

@@ -1,9 +1,17 @@
 package com.example.finalproject.model;
 
+import android.content.Context;
+import android.content.SharedPreferences;
+
+import com.example.finalproject.FinalProjectApplication;
+
 import java.util.HashMap;
 import java.util.Map;
 
 public class User {
+
+    static final String LOCAL_LAST_UPDATED = "user_review_local_last_update";
+
     public String username;
     public String password;
     public String firstName;
@@ -36,6 +44,7 @@ public class User {
         this.uid = uid;
         this.imgUrl = imgUrl;
     }
+
 
     public void setExtraData(String firstName,
                         String lastName, String username, String bio) {
@@ -110,5 +119,17 @@ public class User {
 
     public void setUid(String uid) {
         this.uid = uid;
+    }
+
+    public static  Long getLocalLastReviewUpdate() {
+        SharedPreferences sharedPref = FinalProjectApplication.getMyContext().getSharedPreferences("lastUserReviewUpdate", Context.MODE_PRIVATE);
+        return sharedPref.getLong(LOCAL_LAST_UPDATED, 0);
+    }
+
+    public static void setLocalLastReviewUpdate(Long time) {
+        SharedPreferences sharedPref = FinalProjectApplication.getMyContext().getSharedPreferences("lastUserReviewUpdate", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putLong(LOCAL_LAST_UPDATED,time);
+        editor.commit();
     }
 }
