@@ -17,7 +17,7 @@ public class ReviewModel {
         void onComplete(ArrayList<Review> data);
     }
 
-    public void getAllMusicalReviews(Integer eventId, GetAllReviewsListener callback) {
+    public void getAllMusicalReviews(Integer eventId, Model.Listener<ArrayList<Review>> callback) {
         fbReviewModel.getAllMusicalReviews(eventId,callback);
     }
 
@@ -55,17 +55,17 @@ public class ReviewModel {
     public interface AddReviewListener {
         void onComplete();
     }
-    public void addReview(Review review, AddReviewListener callback) {
-        fbReviewModel.addReview(review, () -> {
+    public void addReview(Review review, Model.Listener<Void> callback) {
+        fbReviewModel.addReview(review, (unused) -> {
             refreshAllUserReviews();
-            callback.onComplete();
+            callback.onComplete(null);
         });
     }
 
     public interface UpdateReviewListener {
         void onComplete();
     }
-    public void updateReview(Review review, UpdateReviewListener callback) {
+    public void updateReview(Review review, Model.Listener<Void> callback) {
         fbReviewModel.updateReview(review, callback);
     }
 }

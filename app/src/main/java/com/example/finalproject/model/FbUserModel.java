@@ -16,7 +16,7 @@ public class FbUserModel {
         usersCollection  = db.collection("users");
     }
 
-    public void getUserData(String userId, UserModel.GetUserDataListener listener) {
+    public void getUserData(String userId, Model.Listener<User> listener) {
         usersCollection.document(userId).get().addOnCompleteListener(task -> {
             if(task.isSuccessful()) {
                 DocumentSnapshot document = task.getResult();
@@ -28,15 +28,15 @@ public class FbUserModel {
         });
     }
 
-    public void createUser(User user, UserModel.AddUserListener listener) {
+    public void createUser(User user, Model.Listener<Void> listener) {
         usersCollection.document(user.getUid()).set(user.toJson()).addOnCompleteListener((task) -> {
-            listener.onComplete();
+            listener.onComplete(null);
         });
     }
 
-    public void updateUser(User user, UserModel.UpdateUserListener listener) {
+    public void updateUser(User user, Model.Listener<Void> listener) {
         usersCollection.document(user.getUid()).update(user.toJson()).addOnCompleteListener((task) -> {
-            listener.onComplete();
+            listener.onComplete(null);
         });
     }
 }

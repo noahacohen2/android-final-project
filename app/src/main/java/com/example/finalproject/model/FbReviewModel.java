@@ -17,7 +17,7 @@ public class FbReviewModel {
         db.setFirestoreSettings(settings);
     }
 
-    public void getAllMusicalReviews(Integer eventId,ReviewModel.GetAllReviewsListener callback) {
+    public void getAllMusicalReviews(Integer eventId, Model.Listener<ArrayList<Review>> callback) {
         db.collection("reviews").whereEqualTo("EventId", eventId).get().addOnCompleteListener((task) -> {
             ArrayList<Review> list = new ArrayList<>();
             if(task.isSuccessful()) {
@@ -32,7 +32,7 @@ public class FbReviewModel {
         });
     }
 
-    public void getUserReviewsSince(Long since, String user, ReviewModel.GetUserReviewsListener callback) {
+    public void getUserReviewsSince(Long since, String user, Model.Listener<ArrayList<Review>> callback) {
         db.collection("reviews").whereEqualTo("UserId", user).whereGreaterThanOrEqualTo("lastUpdated", new Timestamp(since,0)).get().addOnCompleteListener((task) -> {
             ArrayList<Review> list = new ArrayList<>();
             if(task.isSuccessful()) {
@@ -46,18 +46,18 @@ public class FbReviewModel {
         });
     }
 
-    public void addReview(Review review, ReviewModel.AddReviewListener listener) {
+    public void addReview(Review review, Model.Listener<Void> listener) {
         db.collection("reviews").document(review.getDocId()).set(review.toJson())
                 .addOnCompleteListener((task) -> {
 
-                    listener.onComplete();
+                    listener.onComplete(null);
                 });
     }
 
-    public void updateReview(Review review, ReviewModel.UpdateReviewListener listener) {
+    public void updateReview(Review review, Model.Listener<Void> listener) {
         db.collection("reviews").document(review.getDocId()).update(review.toJson())
                 .addOnCompleteListener(task ->{
-            listener.onComplete();
+            listener.onComplete(null);
         });
     }
 
