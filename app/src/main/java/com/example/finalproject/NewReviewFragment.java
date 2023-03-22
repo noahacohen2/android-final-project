@@ -26,7 +26,7 @@ public class NewReviewFragment extends Fragment {
     ActivityResultLauncher<Void> cameraLauncher;
     Review currentReview;
     Boolean isImgSelected = false;
-    Integer eventId; //TODO: get from daniel's screen
+    Integer eventId;
 
     private void setParameters(Review rv, Integer eventId) {
         this.currentReview = rv;

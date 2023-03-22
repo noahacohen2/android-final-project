@@ -148,7 +148,7 @@ public class Review implements Parcelable {
         dest.writeString(content);
         dest.writeString(userId);
         dest.writeString(imgUrl);
-        // todo: add eventId here
+        dest.writeInt(eventId);
     }
 
     public void setUserId(String userId) {
