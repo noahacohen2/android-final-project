@@ -19,13 +19,13 @@ public class Review implements Parcelable {
     public Float stars;
     public String content;
     public String userId;
-    public String eventId;
+    public Integer eventId;
     public String imgUrl;
     public Long lastUpdated;
 
     public Review() {}
 
-    public Review(String seat, Float stars, String content, String userId,String docId,String eventId) {
+    public Review(String seat, Float stars, String content, String userId,String docId,Integer eventId) {
         this.seat = seat;
         this.stars = stars;
         this.content = content;
@@ -34,14 +34,14 @@ public class Review implements Parcelable {
         this.eventId = eventId;
     }
 
-    public Review(String seat, Float stars, String content, String userId, String docId,String eventId, String ImageUrl) {
+    public Review(String seat, Float stars, String content, String userId, String docId,Integer eventId, String ImageUrl) {
         this(seat,stars,content,userId,docId,eventId);
         setImgUrl(ImageUrl);
     }
 
     public Review(Parcel parcel) {
         // seat, stars,content,userId,eventId,docId,imgUrl
-        this( parcel.readString(),parcel.readFloat(),parcel.readString(),parcel.readString(), parcel.readString(), parcel.readString(), parcel.readString());
+        this( parcel.readString(),parcel.readFloat(),parcel.readString(),parcel.readString(), parcel.readString(), parcel.readInt(), parcel.readString());
     }
 
     public static Review fromJson(Map<String, Object> json, String docId) {
@@ -51,7 +51,8 @@ public class Review implements Parcelable {
         String text = (String)json.get("Content");
         String user = (String)json.get("UserId");
         String id = docId;
-        String eventId = (String)json.get("EventId");
+        Long d = (Long) json.get("EventId");
+        Integer eventId = d.intValue();
         String ImageUrl = (String)json.get("ImageUrl");
 
         Review rv = new Review(seat, rate, text, user, id, eventId, ImageUrl);
@@ -114,7 +115,7 @@ public class Review implements Parcelable {
         return content;
     }
 
-    public String getEventId() { return eventId; };
+    public Integer getEventId() { return eventId; };
 
     public Long getLastUpdated() {
         return lastUpdated;
@@ -154,7 +155,7 @@ public class Review implements Parcelable {
         this.userId = userId;
     }
 
-    public void setEventId(String eventId) {
+    public void setEventId(Integer eventId) {
         this.eventId = eventId;
     }
 

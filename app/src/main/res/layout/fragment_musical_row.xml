@@ -8,20 +8,20 @@
 
     <ImageView
         android:id="@+id/musical_img_iv"
-        android:layout_width="97dp"
-        android:layout_height="114dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="12dp"
+        android:layout_width="137dp"
+        android:layout_height="86dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="15dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/frozen" />
+        app:srcCompat="@drawable/default_pic" />
 
     <TextView
         android:id="@+id/musical_title_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
         android:text="Frozen The Musical"
         android:textColor="#000000"
         android:textSize="16sp"
@@ -31,13 +31,15 @@
 
     <TextView
         android:id="@+id/musical_description_tv"
-        android:layout_width="202dp"
-        android:layout_height="77dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="16dp"
+        android:layout_width="250dp"
+        android:layout_height="70dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="5dp"
         android:text="Disney’s spectacular staging of the hit movie will thew any frozen heart."
         android:textColor="#000000"
         android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/musical_img_iv"
         app:layout_constraintTop_toBottomOf="@+id/musical_title_tv" />
 

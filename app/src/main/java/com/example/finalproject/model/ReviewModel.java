@@ -18,8 +18,8 @@ public class ReviewModel {
         void onComplete(ArrayList<Review> data);
     }
 
-    public void getAllReviews(GetAllReviewsListener callback) {
-        fbReviewModel.getAllReviews(callback);
+    public void getAllMusicalReviews(Integer eventId, GetAllReviewsListener callback) {
+        fbReviewModel.getAllMusicalReviews(eventId,callback);
     }
 
     public interface GetUserReviewsListener {

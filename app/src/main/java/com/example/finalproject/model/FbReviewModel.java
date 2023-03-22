@@ -18,8 +18,8 @@ public class FbReviewModel {
         db.setFirestoreSettings(settings);
     }
 
-    public void getAllReviews(ReviewModel.GetAllReviewsListener callback) {
-        db.collection("reviews").get().addOnCompleteListener((task) -> {
+    public void getAllMusicalReviews(Integer eventId,ReviewModel.GetAllReviewsListener callback) {
+        db.collection("reviews").whereEqualTo("EventId", eventId).get().addOnCompleteListener((task) -> {
             ArrayList<Review> list = new ArrayList<>();
             if(task.isSuccessful()) {
                 QuerySnapshot jsonsList = task.getResult();
@@ -39,6 +39,7 @@ public class FbReviewModel {
             if(task.isSuccessful()) {
                 QuerySnapshot jsonsList = task.getResult();
                 for (DocumentSnapshot json: jsonsList) {
+                    Log.d("noa", json.toString());
                     Review rv = Review.fromJson(json.getData(), json.getId());
                     list.add(rv);
                 }

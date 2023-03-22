@@ -103,16 +103,12 @@ public class UserProfileFragment extends Fragment {
                 changeActivity(LoginActivity.class);
             }
         });
-//
-//        // todo: change temp user
-//
-//        User user = new User( "123456","lal@gmail.com", "daniel",
-//                "sabag", "daniel123" , "i am lala", "xUddApYCDjdysmQZrEeQu9jgNwR2","https://firebasestorage.googleapis.com/v0/b/olaf-android.appspot.com/o/images%2F14bc3e06-c07d-47ee-96fa-0b675921efdb.jpg?alt=media&token=c1c76581-9bbf-4e28-a217-92c6241e3671");
-//        if(user.getImgUrl() != null) {
-//            Picasso.get().load(user.getImgUrl()).placeholder(R.drawable.bear).into(binding.avatarImg);
-//        } else {
-//            binding.avatarImg.setImageResource(R.drawable.bear);
-//        }
+
+
+        if (reviewListFragment != null) {
+            reviewListFragment.setParameters(viewModel.getReviewListData().getValue(), reviewRowOnClickListener);
+        }
+
         LiveDataEvents.instance().EventReviewListReload.observe(getViewLifecycleOwner(),unused->{
             ReviewModel.instance.refreshAllUserReviews();
         });
