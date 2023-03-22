@@ -64,10 +64,7 @@ public class EditUserProfileFragment extends Fragment {
             }
         });
 
-        // todo: delete temp user
-        User user = new User( "123456","lal@gmail.com", "daniel",
-                "sabag",   "i am lala", "xUddApYCDjdysmQZrEeQu9jgNwR2","https://firebasestorage.googleapis.com/v0/b/olaf-android.appspot.com/o/images%2F14bc3e06-c07d-47ee-96fa-0b675921efdb.jpg?alt=media&token=c1c76581-9bbf-4e28-a217-92c6241e3671");
-        if(user.getImgUrl() != null) {
+        if(user.getImgUrl() != null && user.getImgUrl() != "") {
             Picasso.get().load(user.getImgUrl()).placeholder(R.drawable.bear).into(binding.userImg);
         } else {
             binding.userImg.setImageResource(R.drawable.bear);
@@ -100,15 +97,12 @@ public class EditUserProfileFragment extends Fragment {
 
     public void onSave(View view){
         binding.saveEditBtn.setOnClickListener(View -> {
-            //TODO: insert img
             User editedUser = new User(this.user.getPassword(),
                     binding.mailTp.getText().toString(),
                     binding.firstNameTp.getText().toString(),
                     binding.lastNameTp.getText().toString(),
-                    binding.bioTp.getText().toString(),
-                    "", user.getImgUrl());
-            editedUser.setUid("xUddApYCDjdysmQZrEeQu9jgNwR2");
-//            editedUser.setImgUrl(user.getImgUrl());
+                    binding.bioTp.getText().toString(), this.user.getUid(),
+                    user.getImgUrl());
 
             if(isImgSelected) {
                 uploadImg(editedUser, (url) -> {

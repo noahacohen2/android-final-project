@@ -81,8 +81,7 @@ public class UserProfileFragment extends Fragment {
             binding.bioTv.setText(user.getBio());
             currUserData = user;
 
-            if(user.getImgUrl() != null) {
-
+            if(user.getImgUrl() != null && user.getImgUrl() != "") {
                 Picasso.get().load(user.getImgUrl()).placeholder(R.drawable.bear).into(binding.avatarImg);
             } else {
                 binding.avatarImg.setImageResource(R.drawable.bear);
